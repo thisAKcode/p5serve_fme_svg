@@ -1,5 +1,5 @@
 
-
+constant_header = '''
 <!DOCTYPE html>
 
 <html lang="en">
@@ -112,22 +112,8 @@ body {
                     <li><a href="/p5serve_fme_svg/index.html">FME geometries</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-
-
-<section id="content" class="body">
-    <div id="container">
-        <div id="item"><a href="sketches/_1_only_lines/index.html"> _1_only_lines</a></div>
-        <div id="item"><a href="sketches/_2_only_lines/index.html"> _2_only_lines</a></div>
-        <div id="item"><a href="sketches/_2_only_lines_v2/index.html"> _2_only_lines_v2</a></div>
-        <div id="item"><a href="sketches/_3_only_lines/index.html"> _3_only_lines</a></div>
-        <div id="item"><a href="sketches/_4_only_lines/index.html"> _4_only_lines</a></div>
-        <div id="item"><a href="sketches/_4_only_linesv2/index.html"> _4_only_linesv2</a></div>
-        <div id="item"><a href="sketches/_5_only_lines/index.html"> _5_only_lines</a></div>
-        <div id="item"><a href="sketches/_6_only_lines/index.html"> _6_only_lines</a></div>
-    </div>
-</section>
-
-
+'''
+constant_footer = '''
 </body>
 </html>
-
+'''
