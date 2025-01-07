@@ -80,12 +80,15 @@
   </main>
 
   <script>
+    const projName = 'onlylines1'; // Replace with the actual project name
+    const _filename = 'asset.svg'; // Replace with the actual filename
+    const pathCheck = `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/assets/${_filename}`;
     const svg = d3.select("body").append("svg")
       .attr("width", "70%")
       .attr("height", 500)
       .style("background-color", "#2d2d2d");
 
-    d3.xml('/asset.svg').then(data => {
+    d3.xml(pathCheck).then(data => {
       const importedNode = document.importNode(data.documentElement, true);
       svg.node().appendChild(importedNode);
       d3.selectAll("svg *")
