@@ -75,7 +75,7 @@
           <li style="float: left; display: inline; margin-right: 10px;"><a href="/" style="color: white; text-decoration: none;">Back to Blog</a></li>
           <li style="float: left; display: inline; margin-left: 10px;"><a href="/p5serve_fme_svg/index.html" style="color: white; text-decoration: none;">FME geometries</a></li>
         </ul>
-      </nav>
+      </nav>)
     </header><!-- /#banner -->
   </main>
 
@@ -92,14 +92,14 @@
       const importedNode = document.importNode(data.documentElement, true);
       svg.node().appendChild(importedNode);
       d3.selectAll("svg *")
-        .style("stroke-width", 1)
+        .style("stroke-width", 2)
         .style("stroke", "white");
     });
   </script>
 
-  <button id="copy-button">Copy Code</button>
+<button id="copy-button">Copy Code</button>
  
-  <code class="language-python" id="code-block"style="font-size: 10px;">
+<code class="language-python" id="code-block" style="font-size: 10px;"></code>
 #main_script
 import fme
 import fmeobjects
@@ -118,27 +118,27 @@ def gen2(repeat= 2):
     generator_way2 = []
     
     for i in range(repeat):
-        _com = []
-        for k in initiator2:
-            if k == "F":
-                _com.append("FF")
-            elif k == "A":
-                _com.append(random.choice(generator2))
-            else:
-                _com.append(k)
-            initiator2 = "".join(_com)
+            _com = []
+            for k in initiator2:
+                    if k == "F":
+                            _com.append("FF")
+                    elif k == "A":
+                            _com.append(random.choice(generator2))
+                    else:
+                            _com.append(k)
+                    initiator2 = "".join(_com)
     return initiator2
 
 generator_rand = {"A":gen2(2)}
 
 
 generators = [
-              {"F": "FB", "A": "F-[[A]+A]+F[+FA]-A", "B":"+F[+FA]-A"},
-              {"F": "FF", "A": "F-[[A]+A]+F[+FA]-A"},
-              {"A": "F+[[B]-B]-F[-FB]+B)", "F": "F[+F]-F[+F[-F]+F]"},
-              {"A":" F+[[B]-B]-F[-FB]+B)", "F":"-F[+F+F]-F"},
-              {"F": "FF", "A": "F[+A]F[-A]A"}
-              ]
+                        {"F": "FB", "A": "F-[[A]+A]+F[+FA]-A", "B":"+F[+FA]-A"},
+                        {"F": "FF", "A": "F-[[A]+A]+F[+FA]-A"},
+                        {"A": "F+[[B]-B]-F[-FB]+B)", "F": "F[+F]-F[+F[-F]+F]"},
+                        {"A":" F+[[B]-B]-F[-FB]+B)", "F":"-F[+F+F]-F"},
+                        {"F": "FF", "A": "F[+A]F[-A]A"}
+                        ]
 
 # global variables goes here
 state = [[4, 1], np.pi / 2]  # Initial starting point and initial direction(in radians) of turtle
@@ -200,17 +200,17 @@ def turtle(command, state):
 #  When the turtle encounters `]`, it pops the last saved state from the stack and restores it.
 # This mechanism is essential for generating branching structures in L-systems, where the turtle needs to backtrack to previous positions to create branches.
     if command == "A" or command == "B" or command == "F":
-        state = forward(state)
+            state = forward(state)
     if command == "f":
-        state = move_pointer(state)
+            state = move_pointer(state)
     if command == "+":
-        state = rotate(1, state)
+            state = rotate(1, state)
     if command == "-":
-        state = rotate(-1, state)
+            state = rotate(-1, state)
     if command == "[":
-        stack.append(state)
+            stack.append(state)
     if command == "]":
-        state = stack.pop()
+            state = stack.pop()
     return state
 
 
@@ -231,10 +231,10 @@ def _main():
     """ 
     global state, com, datastructure
     for i in range(repeat):
-        com = com.translate(str.maketrans(generator))
+            com = com.translate(str.maketrans(generator))
     
     for command in com:
-        state = turtle(command, state)
+            state = turtle(command, state)
     
     return datastructure
 
@@ -243,28 +243,28 @@ class FeatureProcessor(object):
     
 
     def __init__(self):
-        
-        pass
-  
-    def input(self, feature: fmeobjects.FMEFeature):
-        
+            
+            pass
 
-        # svg_body = create_svg_no_deps(datastructure,'foo')
-        _lines = _main()
-        for i in _lines:
-            # i being [[4, 1], [4.0, 1.125]] 
-            # i can make a fme line
-            coords = [tuple(sublist) for sublist in i]
-            feature.setAttribute('i', 'yo')
-            line = FMELine(coords)
-            feature.setGeometry(line)
-            self.pyoutput(feature)
+    def input(self, feature: fmeobjects.FMEFeature):
+            
+
+            # svg_body = create_svg_no_deps(datastructure,'foo')
+            _lines = _main()
+            for i in _lines:
+                    # i being [[4, 1], [4.0, 1.125]] 
+                    # i can make a fme line
+                    coords = [tuple(sublist) for sublist in i]
+                    feature.setAttribute('i', 'yo')
+                    line = FMELine(coords)
+                    feature.setGeometry(line)
+                    self.pyoutput(feature)
 
     def close(self):
-        pass
+            pass
 
     
-  </code>
+</code>
 <script>
     document.getElementById('copy-button').addEventListener('click', function() {
       const codeBlock = document.getElementById('code-block');
