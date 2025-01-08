@@ -82,7 +82,7 @@ html_beginning = """<!DOCTYPE html>
   <script>
     const projName = 'onlylines1'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
-    const pathCheck = `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/assets/${_filename}`;
+    const pathCheck = `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
       .attr("width", "70%")
       .attr("height", 500)

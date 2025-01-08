@@ -1,6 +1,7 @@
 import re
 import html
 import glob
+import os
 from html_components import html_beginning, html_ending
 
 """
@@ -61,6 +62,11 @@ actual_code = f"""
   </code>
 """
 
+
+actual_folder = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
+print(actual_folder)
+html_beginning = html_beginning.replace("_placeholder_projName", actual_folder)
+                                        
 complete_index =html_beginning +actual_code + html_ending
 # Write the decoded script to a new HTML file
 output_file_path = './index.html'
