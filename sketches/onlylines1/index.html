@@ -92,7 +92,7 @@
       const importedNode = document.importNode(data.documentElement, true);
       svg.node().appendChild(importedNode);
       d3.selectAll("svg *")
-        .style("stroke-width", 1)
+        .style("stroke-width", 0.1)
         .style("stroke", "white");
     });
   </script>
