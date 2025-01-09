@@ -66,6 +66,7 @@ actual_code = f"""
 actual_folder = os.path.basename(os.path.dirname(os.path.abspath(__file__)))
 print(actual_folder)
 html_beginning = html_beginning.replace("_placeholder_projName", actual_folder)
+html_beginning = html_beginning.replace("onlylines1", actual_folder)
                                         
 complete_index =html_beginning +actual_code + html_ending
 # Write the decoded script to a new HTML file
