@@ -11,8 +11,16 @@ html_beginning = """<!DOCTYPE html>
   <script src="https://unpkg.com/htmx.org@1.6.1"></script>
 
 <style>
-
-  @media (max-width: 600px) {
+      canvas {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  @media (max-width: 600px) { 
     nav {
       margin: 0 auto 0.2em auto !important;
     }
@@ -29,14 +37,27 @@ html_beginning = """<!DOCTYPE html>
     align-items: center;
   }
 
-  svg, code {
-    width: 70%;
+  svg {
+    width: 100%;
     height: auto;
     margin: 0 auto;
     display: block;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    background-color: #2d2d2d;
+  }
+
+  code {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    background-color: #2d2d2d;
+    overflow-x: auto;
   }
   .token.operator {
     background: none !important;
@@ -59,8 +80,8 @@ html_beginning = """<!DOCTYPE html>
     padding-left: 20px;
   }
   svg {
-    padding: 10px 20px;
-    background-color: #2d2d2d;
+    padding: 5px 5px;
+
     margin: 20px auto;
   }
 </style>
@@ -80,16 +101,19 @@ html_beginning = """<!DOCTYPE html>
   </main>
 
   <script>
+    const projName = 'onlylines1'; // Replace with the actual project name
+    const _filename = 'asset.svg'; // Replace with the actual filename
+    const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
       .attr("width", "70%")
       .attr("height", 500)
       .style("background-color", "#2d2d2d");
 
-    d3.xml('/asset.svg').then(data => {
+    d3.xml(pathCheck).then(data => {
       const importedNode = document.importNode(data.documentElement, true);
       svg.node().appendChild(importedNode);
       d3.selectAll("svg *")
-        .style("stroke-width", 2)
+        .style("stroke-width", 0.01)
         .style("stroke", "white");
     });
   </script>
