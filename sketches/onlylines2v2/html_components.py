@@ -112,11 +112,21 @@ html_beginning = """<!DOCTYPE html>
     d3.xml(pathCheck).then(data => {
       const importedNode = document.importNode(data.documentElement, true);
       svg.node().appendChild(importedNode);
+      // Calculate dynamic stroke width based on canvas size
+      const canvasHeight = svg.node().getBoundingClientRect().height;
+      console.log(canvasHeight)
+      //924 is canvas width then 0.01 is fine
+      //const dynamicStrokeWidth = 0.01 // Math.max(0.01, canvasHeight * 0.001); // Adjust this factor as needed
+      const dynamicStrokeWidth  = canvasHeight* 0.001/100
       d3.selectAll("svg *")
-        .style("stroke-width", 0.01)
+        .style("stroke-width", dynamicStrokeWidth)
         .style("stroke", "white");
     });
   </script>
+
+
+    
+
 
   <button id="copy-button">Copy Code</button>
 """

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_beginning = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -101,7 +101,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines4v2'; // Replace with the actual project name
+    const projName = 'onlylines1'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -122,110 +122,14 @@
     });
   </script>
 
+
+    
+
+
   <button id="copy-button">Copy Code</button>
- 
-  <code class="language-python" id="code-block">
-#main_script
-import numpy as np
-import random
-import math
-import matplotlib.pyplot as plt
+"""
 
-import fme
-import fmeobjects
-from fmeobjects import FMELine
-
-grid_cnt = 5
-num_points = 20
-_offset = 200
-
-class FeatureProcessor(object):
-
-    def __init__(self):
-        pass
-
-    def _create_and_output_line(self, start_point, end_point):
-        line = FMELine()
-        line.appendPoint((start_point[0], start_point[1], 0))
-        line.appendPoint((end_point[0], end_point[1], 0))
-        lineFeature = fmeobjects.FMEFeature()
-        lineFeature.setGeometry(line)
-        self.pyoutput(lineFeature)
-
-    def input(self, feature: fmeobjects.FMEFeature):
-        
-        
-        grid = { n + 1: 
-                (
-                (n % grid_cnt) * _offset,  # (n % grid_cnt):  0-based column *offset = X coord
-                (n // grid_cnt) * _offset  # (n // grid_cnt):  0-based row   * offset = Y coord
-                )
-                for n in range(grid_cnt * grid_cnt)
-                }
-        for _count,j in grid.items():
-            newFeature = fmeobjects.FMEFeature()
-            newFeature.setAttribute('_count', int(_count))
-            point = fmeobjects.FMEPoint()
-            point.setXYZ(float(j[0]), float(j[1]), 0)
-
-            newFeature.setGeometry(point)
-            self.pyoutput(newFeature)
-        
-        # how given a points that are placed in a grid
-        # do i connect them with lines 
-        for i in range(grid_cnt):
-            for j in range(grid_cnt):
-                if j <lt> grid_cnt - 1:  # Connect to the right neighbor
-                    start_point = grid[i * grid_cnt + j + 1]
-                    end_point = grid[i * grid_cnt + j + 2]
-                    self._create_and_output_line(start_point, end_point)
-                if i <lt> grid_cnt - 1:  # Connect to the bottom neighbor
-                    start_point = grid[i * grid_cnt + j + 1]
-                    end_point = grid[(i + 1) * grid_cnt + j + 1]
-                    self._create_and_output_line(start_point, end_point)
-
-
-                
-        # distorted grid
-        grid = { n + 1: 
-        (
-        (n % grid_cnt) * _offset * random.uniform(0.5, 1),  # (n %  5):  0-based column * offset * random factor = X coord
-        (n // grid_cnt) * _offset * random.uniform(0.5, 1) + 1000 # (n // 5):  0-based row   * offset = Y coord
-        )
-            for n in range(grid_cnt * grid_cnt)
-            }
-
-        for _count,j in grid.items():
-            newFeature = fmeobjects.FMEFeature()
-            newFeature.setAttribute('_count', int(_count))
-            point = fmeobjects.FMEPoint()
-            point.setXYZ(float(j[0]), float(j[1]), 0)
-
-            newFeature.setGeometry(point)
-            self.pyoutput(newFeature)
-        
-        # how given a points that are placed in a grid
-        # do i connect them with lines 
-        for i in range(grid_cnt):
-            for j in range(grid_cnt):
-                if j <lt> grid_cnt - 1:  # Connect to the right neighbor
-                    start_point = grid[i * grid_cnt + j + 1]
-                    end_point = grid[i * grid_cnt + j + 2]
-                    self._create_and_output_line(start_point, end_point)
-                if i <lt> grid_cnt - 1:  # Connect to the bottom neighbor
-                    start_point = grid[i * grid_cnt + j + 1]
-                    end_point = grid[(i + 1) * grid_cnt + j + 1]
-                    self._create_and_output_line(start_point, end_point)
-
-
-    def close(self):
-        pass
-
-    def process_group(self):
-
-        pass
-  </code>
-<script>
+html_ending = """<script>
     document.getElementById('copy-button').addEventListener('click', function() {
       const codeBlock = document.getElementById('code-block');
       const range = document.createRange();
@@ -238,3 +142,4 @@ class FeatureProcessor(object):
   </script>
 </body>
 </html>
+"""
