@@ -4,12 +4,14 @@ html_beginning = """<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FME Geometry</title>
+  <meta name="description" content="Learn how to use Python in FME to programmatically work with feature geometries">
+  <meta name="keywords" content="FME, Python, fmeobjects, GIS, Geometry FME Objects">
+  <meta name="author" content="Aleksei Kupiakov">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-python.min.js"></script>
   <script src="https://unpkg.com/htmx.org@1.6.1"></script>
-
 <style>
       canvas {
       display: block;
