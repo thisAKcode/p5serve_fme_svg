@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+html_beginning = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FME Geometry</title>
+  <meta name="description" content="Learn how to use Python in FME to programmatically work with feature geometries">
+  <meta name="keywords" content="FME, Python, fmeobjects, GIS, Geometry FME Objects">
+  <meta name="author" content="Aleksei Kupiakov">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
@@ -101,7 +104,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines6'; // Replace with the actual project name
+    const projName = 'onlylines1'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -137,95 +140,9 @@
 
 
   <button id="copy-button">Copy Code</button>
- 
-  <code class="language-python" id="code-block">
-#main_script
-import fme
-import fmeobjects
-import random
-import math
-import matplotlib.pyplot as plt
-import numpy as np
-from PIL import Image
-from fmeobjects import FMELine
+"""
 
-
-grid_cnt = 5
-num_points = 20
-_offset = 200
-unit = 15
-half_unit = int(unit / 2)
-_path = r'C:\p5serve_fme_svg\sketches\_6_only_lines'
-_imagename = 'image.png'
-# load image _imagename from _path 
-img = Image.open(f'{_path}/{_imagename}')
-img= img.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
-pixelColor = img.getpixel((10, 10))
-image_width, image_height = img.size
-# image_height, image_width = image.shape[:2]
-
-width, height = image_width, image_height
-
-def map(value, left_min, left_max, right_min, right_max):
-    # Figure out how 'wide' each range is
-    left_span = left_max - left_min
-    right_span = right_max - right_min
-    # Convert the left range into a 0-1 range (float)
-    value_scaled = float(value - left_min) / float(left_span)
-    # Convert the 0-1 range into a value in the right range.
-    return right_min + (value_scaled * right_span)
-
-
-class FeatureProcessor(object):
-
-    def __init__(self):
-        pass
-    
-    def _create_and_output_line(self, start_point, end_point, attributes):
-        line = FMELine()
-        line.appendPoint((start_point[0], start_point[1], 0))
-        line.appendPoint((end_point[0], end_point[1], 0))
-        
-        lineFeature = fmeobjects.FMEFeature()
-        lineFeature.setAttribute('foo',attributes)
-        lineFeature.setGeometry(line)
-        self.pyoutput(lineFeature)
-  
-    def input(self, feature: fmeobjects.FMEFeature):
-        grid = { n + 1: 
-                (
-                (n % 5) * _offset + (_offset * random.uniform(0.5, 1)),  # (n %  5):  0-based column *offset = X coord
-                (n // 5) * _offset + (_offset * random.uniform(0.5, 1))# (n // 5):  0-based row   * offset = Y coord
-                )
-                for n in range(num_points)
-                }
-        # Get image size
-        image_width, image_height = img.size
-        line_counter= 0
-        for x in range(0, width, half_unit):
-            for y in range(0, height, unit):
-                pixelColor = img.getpixel((x, y))
-                gray = (pixelColor[0] + pixelColor[1] + pixelColor[2]) / 3          
-                size = map(gray, left_min=0, left_max=255, right_min=0, right_max=half_unit)
-                if line_counter%2 == 0:
-                    start_point = (x,y)
-                    end_point= (x-half_unit, y +unit)
-                    self._create_and_output_line(start_point, end_point,size)
-                else:
-                    start_point = (x-half_unit, y)
-                    end_point= (x, y+unit)
-                    self._create_and_output_line(start_point, end_point, size)             
-            line_counter +=1
-
-
-    def close(self):
-        pass
-
-    def process_group(self):
-
-        pass
-  </code>
-<script>
+html_ending = """<script>
     document.getElementById('copy-button').addEventListener('click', function() {
       const codeBlock = document.getElementById('code-block');
       const range = document.createRange();
@@ -238,3 +155,4 @@ class FeatureProcessor(object):
   </script>
 </body>
 </html>
+"""
