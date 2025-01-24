@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FME Geometry</title>
-    <meta name="description" content="Learn how to use Python in FME to programmatically work with feature geometries">
-    <meta name="keywords" content="FME, Python, fmeobjects, GIS, Geometry FME Objects">
-    <meta name="author" content="Aleksei Kupiakov">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-python.min.js"></script>
-    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FME Geometry</title>
+  <meta name="description" content="Learn how to use Python in FME to programmatically work with feature geometries">
+  <meta name="keywords" content="FME, Python, fmeobjects, GIS, Geometry FME Objects">
+  <meta name="author" content="Aleksei Kupiakov">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-python.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.6.1"></script>
 
 <style>
       canvas {
@@ -104,7 +104,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines1'; // Replace with the actual project name
+    const projName = 'onlylines8'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -146,166 +146,116 @@
 import fme
 import fmeobjects
 import random
-from fmeobjects import FMELine, FMEGeometryTools
 import numpy as np
-import matplotlib.pyplot as plt
+from fmeobjects import FMELine, FMEGeometryTools
+from math import sqrt, cos, sin, pi
 
 
+width = 360
+N = 8
+d=width/N
 
 
-def gen2(repeat= 2):
-    # recursive function
-    initiator2 = "A" 
-    generator2 = [ "F-[[A]+A]+F[+FA]-A" , "F[+A]F[-A]A" , "F[+[FA[-A]F]][-A]FA" ]
-    generator_way2 = []
+def compute_bearing(x1y1, x2y2):
+    # if i have too many values in the list, i can use *_
+    x1, y1, *_ = x1y1
+    x2, y2, *_ = x2y2
+    dx = x2 - x1
+    dy = y2 - y1
+    bearing_rad =  np.arctan2(dy, dx)
+    bearing_deg = np.degrees(bearing_rad)
+    return bearing_deg
     
-    for i in range(repeat):
-        _com = []
-        for k in initiator2:
-            if k == "F":
-                _com.append("FF")
-            elif k == "A":
-                _com.append(random.choice(generator2))
-            else:
-                _com.append(k)
-            initiator2 = "".join(_com)
-    return initiator2
-
-generator_rand = {"A":gen2(2)}
-
-
-generators = [
-              {"F": "FB", "A": "F-[[A]+A]+F[+FA]-A", "B":"+F[+FA]-A"},
-              {"F": "FF", "A": "F-[[A]+A]+F[+FA]-A"},
-              {"A": "F+[[B]-B]-F[-FB]+B)", "F": "F[+F]-F[+F[-F]+F]"},
-              {"A":" F+[[B]-B]-F[-FB]+B)", "F":"-F[+F+F]-F"},
-              {"F": "FF", "A": "F[+A]F[-A]A"}
-              ]
-
-# global variables goes here
-state = [[4, 1], np.pi / 2]  # Initial starting point and initial direction(in radians) of turtle
-initiator = "A"
-initiator = "+F[+F]F"
-initiator = "+F[+A]F"
-initiator = "A"
-com = initiator
-
-generator = random.choice(generators)
-generator = generators[-1]
-generator= generator_rand
-
-angle = 22.5 / 180 * np.pi  # Rotation angle degrees -<gt> radians
-drawcolor = 'green'
-repeat = 4
-distance = 2 * (1 / 2) ** repeat  # Length of one step. Change according to the object
-# call stack is used to store the state of the turtle when encountering the `[` command 
-# and to restore it when encountering the `]` command in order to 
-# to remember its position and direction at certain points, enabling it to return to 
-# those points later.
-
-
-stack = []
-datastructure = []
-
-
-
-# Move pointer froward  without drawing
-# and memorize the state 
-def move_pointer(state):
-    th = state[1]
-    x = state[0][0] + distance * np.cos(th)
-    y = state[0][1] + distance * np.sin(th)
-    return [[x, y], th]
-
-
-# Move forward by distance and draw
-def forward(state):
-    th = state[1]
-    x1 = state[0][0]
-    y1 = state[0][1]
-    x2 = x1 + distance * np.cos(th)
-    y2 = y1 + distance * np.sin(th)
-    datastructure.append([[x1, y1], [x2, y2]])
-    return [[x2, y2], th]
-
-
-# Change direction coef 1/0 left/right
-def rotate(coef, state):
-    th = state[1]
-    th = th + coef * angle
-    return [state[0], th]
-
-
-def turtle(command, state):
-# Move the turtle according to the command L, R do nothing, return the state of the turtle
-# When the turtle encounters `[`, it saves the current state (position and direction) onto the stack.
-#  When the turtle encounters `]`, it pops the last saved state from the stack and restores it.
-# This mechanism is essential for generating branching structures in L-systems, where the turtle needs to backtrack to previous positions to create branches.
-    if command == "A" or command == "B" or command == "F":
-        state = forward(state)
-    if command == "f":
-        state = move_pointer(state)
-    if command == "+":
-        state = rotate(1, state)
-    if command == "-":
-        state = rotate(-1, state)
-    if command == "[":
-        stack.append(state)
-    if command == "]":
-        state = stack.pop()
-    return state
-
-
-
-def _main():
-    """ main calls 
-    str.maketrans(generator)
-    com.translate(...)
-    for command in com: 
-    turtle(command, state)   where for each command you call:
-    forward(state)|     
-    move_pointer(state)|     
-    rotate(coef, state)|     
-    stack.append(state)|     
-    stack.pop()     
-    This sequence ensures that the turtle graphics are generated according to the L
-    system rules defined by the    generator  
-    """ 
-    global state, com, datastructure
-    for i in range(repeat):
-        com = com.translate(str.maketrans(generator))
+def translate(points,x_diff, y_diff):
+    # input list of lists 
+    # with coordinates [[x0,y0][x1,y1][x2,y2]]
+    # add diff values for each x and y 
+    translated_coords = [(i[0] + x_diff, i[1] + y_diff)
+    for i in points
+    ]
+    return translated_coords
+  
     
-    for command in com:
-        state = turtle(command, state)
-    
-    return datastructure
-
-
 class FeatureProcessor(object):
     
 
     def __init__(self):
-        
         pass
-  
-    def input(self, feature: fmeobjects.FMEFeature):
+    def pattern(self, x, y, size):
+        """
+        prepair a pattern consisting of two sets of triangles 
+        at the specified position:
+        x (float): The x-coordinate of the pattern's position.
+        y (float): The y-coordinate of the pattern's position.
+        size (float): The size of the pattern.
+        The function calculates the points for two sets of 
+        # triangles based on the given size.
+        It then translates the drawing context to 
+        # the specified (x, y) position and draws the triangles.
+        """
+        l = size / sqrt(4)
+        points = []
+        for i in range(3):
+            r = 3 * pi / 3 * i + pi / 6 + pi
+            points.append([l * cos(r), l * sin(r)])
         
+        #move the current position to the given x and y values.
+        x_start, y_start  = x, y + l / 2
+        start_point = (float(x_start),float(y_start), 0)
+        start_point_pt = fmeobjects.FMEPoint()
+        start_point_pt.setXYZ(float(x_start),float(y_start), 0)
+        translated_points = translate(points,x_start, y_start)
+        points = translated_points
+        
+        fme_points = []
+        
+        for i in translated_points:
+            point = fmeobjects.FMEPoint()
+            point.setXYZ(float(i[0]), float(i[1]), 0)
+            fme_points.append(point)
+            fme_points.append(start_point_pt)
+        
+        for i in fme_points:
+            newFeature = fmeobjects.FMEFeature()
+            newFeature.setGeometry(i)
+            self.pyoutput(newFeature)
 
+        count= 0
+        for i in range(len(translated_points) - 1):
+            _points = [translated_points[i],
+                       start_point]
+            
+            linefeature = fmeobjects.FMEFeature()
+            line = FMELine(_points)
+            # get bearing
+            bearing = compute_bearing(translated_points[i], start_point)
+            linefeature.setGeometry(line)
+            self.pyoutput(linefeature)
+            
+            for i in np.arange(0, 2, 0.33):
+                linefeature.performFunction(f'@Rotate2D({float(bearing*i)},{float(x_start)},{float(y_start)}')
+                self.pyoutput(linefeature)
+            
+            # odd way to call functions in python
+            #linefeature.performFunction(f'@Rotate2D(15.0,0.0,0.0')
+            #self.pyoutput(linefeature)
+            #linefeature.performFunction(f'@Rotate2D(45.0,0.0,0.0')
+            #self.pyoutput(linefeature)
+
+        return points 
+        
+    def input(self, feature: fmeobjects.FMEFeature):
         # svg_body = create_svg_no_deps(datastructure,'foo')
-        _lines = _main()
-        for i in _lines:
-            # i being [[4, 1], [4.0, 1.125]] 
-            # i can make a fme line
-            coords = [tuple(sublist) for sublist in i]
-            feature.setAttribute('i', 'yo')
-            line = FMELine(coords)
-            feature.setGeometry(line)
-            self.pyoutput(feature)
+        pass
 
     def close(self):
-        pass
+        for i in range(2 * N + 1):
+            x = d * i / 2
+            dy = d * sqrt(3) / 2 if i % 2 == 1 else 0
+            for j in range(N):
+                y = d * j * sqrt(3)
+                points = self.pattern(x, y + dy, d)
 
-    
   </code>
 <script>
     document.getElementById('copy-button').addEventListener('click', function() {
