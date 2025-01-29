@@ -1,0 +1,74 @@
+var dx;
+function setup() {
+  createCanvas(450, 400);
+  background('#e7acb9');
+  noFill();
+  strokeWeight(3);
+  stroke('#da8d93');
+  //上向き三角形を繰り返し配置する
+  for(j=0;j<10;j++){
+    for(i=0;i<10;i++){
+
+    if(j%2 == 0){
+      dx = 0;
+    }else{
+      dx = sqrt(3)*15
+    }
+      
+      push();
+      draw_uptriangle(i*sqrt(3)*30-dx, j*45);
+      pop();
+      
+      push();
+      draw_downtriangle(15*sqrt(3)+i*sqrt(3)*30-dx, -sqrt(3)*10+j*45);
+      pop();
+      
+    }
+  }
+}
+
+function draw() {
+
+}
+
+//上向三角形
+function draw_uptriangle(tx,ty){
+  var corner=3;
+  translate(tx,ty);
+  rotate(PI/3);
+
+  beginShape();
+  for (var i=0; i<corner; i++) {
+    var angle=map(i, 0, corner, 0, 360);
+    var x=sin(radians(angle))*30;
+    var y=cos(radians(angle))*30;
+    vertex(x, y);
+
+    line(0,0,sin(radians(angle))*30,cos(radians(angle))*30)
+  }
+  endShape(CLOSE);
+}
+
+//下向三角形
+function draw_downtriangle(tx,ty){
+  var corner=3;
+  translate(tx,ty);
+
+  beginShape();
+  for (var i=0; i<corner; i++) {
+    var angle=map(i, 0, corner, 0, 360);
+    var x=sin(radians(angle))*30;
+    var y=cos(radians(angle))*30;
+    vertex(x, y);
+
+    line(0,0,sin(radians(angle))*30,cos(radians(angle))*30)
+  }
+  endShape(CLOSE);
+  
+}
+
+function keyPressed() {
+  if ( keyIsPressed === true && keyCode === DOWN_ARROW) {
+			save('sketch.jpg'); // save a specific canvas with a filename
+	}
+}
