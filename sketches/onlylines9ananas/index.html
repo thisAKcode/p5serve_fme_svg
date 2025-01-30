@@ -104,7 +104,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines8'; // Replace with the actual project name
+    const projName = 'onlylines9ananas'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -147,29 +147,16 @@ import fme
 import fmeobjects
 import random
 import numpy as np
-from fmeobjects import FMELine, FMEGeometryTools
-from math import sqrt, cos, sin, pi
+from fmeobjects import FMELine,FMEPoint, FMEGeometryTools
+from math import sqrt, cos, sin, pi, radians
 
 
 width = 360
-N = 8
+N = 1
 d=width/N
 
 
-def compute_bearing(x1y1, x2y2):
-    # if i have too many values in the list, i can use *_
-    x1, y1, *_ = x1y1
-    x2, y2, *_ = x2y2
-    dx = x2 - x1
-    dy = y2 - y1
-    bearing_rad =  np.arctan2(dy, dx)
-    bearing_deg = np.degrees(bearing_rad)
-    return bearing_deg
-    
 def translate(points,x_diff, y_diff):
-    # input list of lists 
-    # with coordinates [[x0,y0][x1,y1][x2,y2]]
-    # add diff values for each x and y 
     translated_coords = [(i[0] + x_diff, i[1] + y_diff)
     for i in points
     ]
@@ -177,84 +164,70 @@ def translate(points,x_diff, y_diff):
   
     
 class FeatureProcessor(object):
-    
 
     def __init__(self):
         pass
+
+    def draw_uptriangle(self, tx, ty):
+        corner = 3
+        _center_point = FMEPoint()
+        _center_point.setXYZ(float(tx), float(ty), 0)
+        _points = []
+        _lines = []
+        angle_offset = pi / 3
+        for i in range(corner):
+            angle = 2 * pi * i / corner + angle_offset
+            next_point = FMEPoint()
+            x2 = float(tx) + sin(angle) * 30
+            y2 = float(ty) + cos(angle) * 30
+            next_point.setXYZ(x2, y2, 0)
+            _points.append(next_point)
+            line = FMELine()
+            line.appendPoint(next_point)
+        _line =FMELine()  
+        for i in _points:
+            _line.appendPoint(i)
+        _lines.append(_line)
+        return _points,_lines
+
+
     def pattern(self, x, y, size):
-        """
-        prepair a pattern consisting of two sets of triangles 
-        at the specified position:
-        x (float): The x-coordinate of the pattern's position.
-        y (float): The y-coordinate of the pattern's position.
-        size (float): The size of the pattern.
-        The function calculates the points for two sets of 
-        # triangles based on the given size.
-        It then translates the drawing context to 
-        # the specified (x, y) position and draws the triangles.
-        """
         l = size / sqrt(4)
         points = []
-        for i in range(3):
-            r = 3 * pi / 3 * i + pi / 6 + pi
-            points.append([l * cos(r), l * sin(r)])
+        lines = []
+        for j in range(10):
+            for i in range(10):
+                if j % 2 == 0:
+                    dx = 0
+                else:
+                    dx = sqrt(3) * 15
+                up_triangle_points, uplines = self.draw_uptriangle(i * sqrt(3) * 30 - dx, j * 45)
+                down_triangle_points, downlines = self.draw_uptriangle(
+                15 * sqrt(3) + i * sqrt(3) * 30 - dx,
+                -sqrt(3) * 10 + j * 45)
+                points.extend(up_triangle_points)
+                lines.extend(uplines)
+                lines.extend(downlines)
         
-        #move the current position to the given x and y values.
-        x_start, y_start  = x, y + l / 2
-        start_point = (float(x_start),float(y_start), 0)
-        start_point_pt = fmeobjects.FMEPoint()
-        start_point_pt.setXYZ(float(x_start),float(y_start), 0)
-        translated_points = translate(points,x_start, y_start)
-        points = translated_points
-        
-        fme_points = []
-        
-        for i in translated_points:
-            point = fmeobjects.FMEPoint()
-            point.setXYZ(float(i[0]), float(i[1]), 0)
-            fme_points.append(point)
-            fme_points.append(start_point_pt)
-        
-        for i in fme_points:
+        for i in points:
+            newFeature = fmeobjects.FMEFeature()
+            newFeature.setGeometry(i)
+            self.pyoutput(newFeature)
+        for i in lines:
             newFeature = fmeobjects.FMEFeature()
             newFeature.setGeometry(i)
             self.pyoutput(newFeature)
 
-        count= 0
-        for i in range(len(translated_points) - 1):
-            _points = [translated_points[i],
-                       start_point]
-            
-            linefeature = fmeobjects.FMEFeature()
-            line = FMELine(_points)
-            # get bearing
-            bearing = compute_bearing(translated_points[i], start_point)
-            linefeature.setGeometry(line)
-            self.pyoutput(linefeature)
-            
-            for i in np.arange(0, 2, 0.33):
-                linefeature.performFunction(f'@Rotate2D({float(bearing*i)},{float(x_start)},{float(y_start)}')
-                self.pyoutput(linefeature)
-            
-            # odd way to call functions in python
-            #linefeature.performFunction(f'@Rotate2D(15.0,0.0,0.0')
-            #self.pyoutput(linefeature)
-            #linefeature.performFunction(f'@Rotate2D(45.0,0.0,0.0')
-            #self.pyoutput(linefeature)
-
         return points 
         
     def input(self, feature: fmeobjects.FMEFeature):
-        # svg_body = create_svg_no_deps(datastructure,'foo')
         pass
 
     def close(self):
-        for i in range(2 * N + 1):
-            x = d * i / 2
-            dy = d * sqrt(3) / 2 if i % 2 == 1 else 0
-            for j in range(N):
-                y = d * j * sqrt(3)
-                points = self.pattern(x, y + dy, d)
+        x = d * 1 / 2
+        dy = d * sqrt(3) / 2 if 1 % 2 == 1 else 0
+        y = d * 1 * sqrt(3)
+        points = self.pattern(0, 0, d)
 
   </code>
 <script>

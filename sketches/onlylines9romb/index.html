@@ -104,7 +104,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines9ge1'; // Replace with the actual project name
+    const projName = 'onlylines9romb'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -151,14 +151,19 @@ from fmeobjects import FMELine,FMEPoint, FMEGeometryTools
 from math import sqrt, cos, sin, pi, radians
 
 
-
 width = 360
 N = 1
 d=width/N
 
+
+def translate(points,x_diff, y_diff):
+    translated_coords = [(i[0] + x_diff, i[1] + y_diff)
+    for i in points
+    ]
+    return translated_coords
+  
     
 class FeatureProcessor(object):
-    
 
     def __init__(self):
         pass
@@ -179,11 +184,9 @@ class FeatureProcessor(object):
             _points.append(next_point)
             line = FMELine()
             line.appendPoint(next_point)
-
         _line =FMELine()  
         for i in _points:
             _line.appendPoint(i)
-        _line.appendPoint(_points[0])
         _lines.append(_line)
         return _points,_lines
 
@@ -198,21 +201,16 @@ class FeatureProcessor(object):
                     dx = 0
                 else:
                     dx = sqrt(3) * 15
-            
                 up_triangle_points, uplines = self.draw_uptriangle(i * sqrt(3) * 30 - dx, j * 45)
-                down_triangle_points, downlines = self.draw_uptriangle(
-                15 * sqrt(3) + i * sqrt(3) * 30 - dx,
-                -sqrt(3) * 10 + j * 45)
-            
                 points.extend(up_triangle_points)
-                points.extend(down_triangle_points)
                 lines.extend(uplines)
-                lines.extend(downlines)
+
         
         for i in points:
             newFeature = fmeobjects.FMEFeature()
             newFeature.setGeometry(i)
             self.pyoutput(newFeature)
+
         for i in lines:
             newFeature = fmeobjects.FMEFeature()
             newFeature.setGeometry(i)
@@ -221,6 +219,7 @@ class FeatureProcessor(object):
         return points 
         
     def input(self, feature: fmeobjects.FMEFeature):
+        # svg_body = create_svg_no_deps(datastructure,'foo')
         pass
 
     def close(self):
@@ -228,6 +227,7 @@ class FeatureProcessor(object):
         dy = d * sqrt(3) / 2 if 1 % 2 == 1 else 0
         y = d * 1 * sqrt(3)
         points = self.pattern(0, 0, d)
+
   </code>
 <script>
     document.getElementById('copy-button').addEventListener('click', function() {

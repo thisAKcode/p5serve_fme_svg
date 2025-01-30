@@ -104,7 +104,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines9ge1'; // Replace with the actual project name
+    const projName = 'onlylines9ge3'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -151,14 +151,12 @@ from fmeobjects import FMELine,FMEPoint, FMEGeometryTools
 from math import sqrt, cos, sin, pi, radians
 
 
-
 width = 360
 N = 1
 d=width/N
 
     
 class FeatureProcessor(object):
-    
 
     def __init__(self):
         pass
@@ -172,14 +170,16 @@ class FeatureProcessor(object):
         angle_offset = pi / 3
         for i in range(corner):
             angle = 2 * pi * i / corner + angle_offset
+            current_point = _center_point
             next_point = FMEPoint()
             x2 = float(tx) + sin(angle) * 30
             y2 = float(ty) + cos(angle) * 30
             next_point.setXYZ(x2, y2, 0)
             _points.append(next_point)
             line = FMELine()
+            line.appendPoint(current_point)
             line.appendPoint(next_point)
-
+            _lines.append(line)
         _line =FMELine()  
         for i in _points:
             _line.appendPoint(i)
@@ -193,7 +193,7 @@ class FeatureProcessor(object):
         points = []
         lines = []
         for j in range(10):
-            for i in range(10):
+            for i in range(0,10,2):
                 if j % 2 == 0:
                     dx = 0
                 else:

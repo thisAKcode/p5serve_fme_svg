@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_beginning = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -104,7 +104,7 @@
   </main>
 
   <script>
-    const projName = 'onlylines9ge1'; // Replace with the actual project name
+    const projName = 'onlylines1'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -140,96 +140,9 @@
 
 
   <button id="copy-button">Copy Code</button>
- 
-  <code class="language-python" id="code-block">
-#main_script
-import fme
-import fmeobjects
-import random
-import numpy as np
-from fmeobjects import FMELine,FMEPoint, FMEGeometryTools
-from math import sqrt, cos, sin, pi, radians
+"""
 
-
-
-width = 360
-N = 1
-d=width/N
-
-    
-class FeatureProcessor(object):
-    
-
-    def __init__(self):
-        pass
-
-    def draw_uptriangle(self, tx, ty):
-        corner = 3
-        _center_point = FMEPoint()
-        _center_point.setXYZ(float(tx), float(ty), 0)
-        _points = []
-        _lines = []
-        angle_offset = pi / 3
-        for i in range(corner):
-            angle = 2 * pi * i / corner + angle_offset
-            next_point = FMEPoint()
-            x2 = float(tx) + sin(angle) * 30
-            y2 = float(ty) + cos(angle) * 30
-            next_point.setXYZ(x2, y2, 0)
-            _points.append(next_point)
-            line = FMELine()
-            line.appendPoint(next_point)
-
-        _line =FMELine()  
-        for i in _points:
-            _line.appendPoint(i)
-        _line.appendPoint(_points[0])
-        _lines.append(_line)
-        return _points,_lines
-
-
-    def pattern(self, x, y, size):
-        l = size / sqrt(4)
-        points = []
-        lines = []
-        for j in range(10):
-            for i in range(10):
-                if j % 2 == 0:
-                    dx = 0
-                else:
-                    dx = sqrt(3) * 15
-            
-                up_triangle_points, uplines = self.draw_uptriangle(i * sqrt(3) * 30 - dx, j * 45)
-                down_triangle_points, downlines = self.draw_uptriangle(
-                15 * sqrt(3) + i * sqrt(3) * 30 - dx,
-                -sqrt(3) * 10 + j * 45)
-            
-                points.extend(up_triangle_points)
-                points.extend(down_triangle_points)
-                lines.extend(uplines)
-                lines.extend(downlines)
-        
-        for i in points:
-            newFeature = fmeobjects.FMEFeature()
-            newFeature.setGeometry(i)
-            self.pyoutput(newFeature)
-        for i in lines:
-            newFeature = fmeobjects.FMEFeature()
-            newFeature.setGeometry(i)
-            self.pyoutput(newFeature)
-
-        return points 
-        
-    def input(self, feature: fmeobjects.FMEFeature):
-        pass
-
-    def close(self):
-        x = d * 1 / 2
-        dy = d * sqrt(3) / 2 if 1 % 2 == 1 else 0
-        y = d * 1 * sqrt(3)
-        points = self.pattern(0, 0, d)
-  </code>
-<script>
+html_ending = """<script>
     document.getElementById('copy-button').addEventListener('click', function() {
       const codeBlock = document.getElementById('code-block');
       const range = document.createRange();
@@ -242,3 +155,4 @@ class FeatureProcessor(object):
   </script>
 </body>
 </html>
+"""
