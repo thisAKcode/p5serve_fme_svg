@@ -6,6 +6,7 @@ constant_header = '''
 <head>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
+        <meta name="google-site-verification" content="i-2LgSowoaEqE3Ai41mTMkzQqsG9PW2Gb46enP80aaE" />
         <title>PrettyLagom</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 <style>
