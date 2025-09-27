@@ -1,0 +1,848 @@
+#! <?xml version="1.0" encoding="UTF-8" ?>
+#! <WORKSPACE
+#    Command line to run this workspace:
+#        "C:\Program Files\FME\fme.exe" C:\p5serve_fme_svg\sketches\lines14_sleepy_truchet-python\lines.fmw
+#          --DestDataset_SVG ".\asset.svg"
+#          --FME_LAUNCH_VIEWER_APP "YES"
+#    
+#!   A0_PREVIEW_IMAGE="data:image/png;base64,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"
+#!   ARCGIS_COMPATIBILITY="ARCGIS_AUTO"
+#!   ATTR_TYPE_ENCODING="SDF"
+#!   BEGIN_PYTHON="import&lt;space&gt;fme&lt;lf&gt;print&lt;openparen&gt;dir&lt;openparen&gt;fme&lt;closeparen&gt;&lt;closeparen&gt;&lt;lf&gt;"
+#!   BEGIN_TCL=""
+#!   CATEGORY=""
+#!   DESCRIPTION=""
+#!   DESTINATION="NONE"
+#!   DESTINATION_ROUTING_FILE=""
+#!   DOC_EXTENTS="2830.21 850.017"
+#!   DOC_TOP_LEFT="1234.03 -1356.68"
+#!   END_PYTHON=""
+#!   END_TCL=""
+#!   EXPLICIT_BOOKMARK_ORDER="false"
+#!   FME_BUILD_NUM="24627"
+#!   FME_BULK_MODE_THRESHOLD="2000"
+#!   FME_DOCUMENT_GUID="f72bd0b7-6e32-499b-85ef-c8e9e151e522"
+#!   FME_DOCUMENT_PRIORGUID="2367c236-8912-458f-8ab0-fe81278a2ad2,b8b38a7d-2fcf-45c9-a5b1-1f998b560e53,19a13fb4-edf1-4ed7-9c68-c25c18c0400a,8efe004b-4f19-4284-b236-e74ed7e07a88,30314f1e-60c1-4f5a-b6ff-64b2a7af42af,a6924fdc-59ab-4353-b3cb-bad3d140e768,3417b1c7-b559-4cf6-8970-be65f0e94a94,33591896-f924-4c3b-ab1b-c68aa0e48116,a34d9f77-2a6a-4d69-954e-44aa7b25961d,10b196bf-9138-4838-9514-e4ad34e5f80c,dab552d2-0e99-4a2f-9f31-f435bc8ffab9,0265f2d9-db5b-4e68-89b6-4a2129868288,74aac371-6630-4533-a4d8-1ffb6869c7b1,50ec9f4f-7782-43e0-a87a-ed8ca6cb929f,94c6ab85-6ac4-4cad-987f-7790ba3a0a03,d4130c70-e936-4b95-888b-d99cb08f9d53,46222247-1345-4c21-a1fe-92dc618943b7,8fe5a5e2-270a-4fb7-8d29-7e81d0c187ba,f70b48d1-0548-4f64-b2de-4429a09c2410,45f8ed20-df05-4b8e-9f06-2ef241009014,49e2308b-7098-42a3-ba30-fdfc478bd127,63cdd218-23cc-48eb-9f7d-2f573c2ee69e,6becf547-baac-42c8-9f4f-da7466f3ef91,a60c29c7-8d52-4c5b-82d3-17cc961c02f6,57ce65a9-1eb3-48d7-a6c1-257746be652c,832c603d-8d10-45a2-8afe-933a87e335eb,94fd289a-3a1e-451b-b00f-ba4f74d62190,6841d463-734a-4b07-8113-7faf3d743c4d,11a37e8b-e560-4600-9a52-4aafd4d7c1c3,be486d3b-d663-4797-9fa1-2ff9933b377c,d73571d3-ece0-4839-9c25-80e7e34fa21b,3b314060-5b92-4d73-a9e5-d1d280f18530,30343555-94ab-4a0d-811b-30a12a3bb65c,4e5289ab-6556-4689-b832-dda8d0371be0,fae180b5-18c6-429d-a2f4-08de8669ba06,60d2e93a-be9f-43a4-a819-7a02a06a2122,e3684f0b-8afc-4af0-9903-3a898d64d22d,cadb648e-df5c-49ba-a76a-57239650be98,8f15d9f6-4966-4fcf-aaeb-3eb5ab7ad6a8,27b24145-3d8c-4153-812c-7613726d0443,723c189e-631d-4587-a92b-32a30be1cc89,19efeb21-3703-413f-ac39-2d747e28e5e7,f24f2d58-5a23-41d4-9798-b42b9ad3cddc,9d57a357-e626-49b5-90f9-9ffa65810bbd,c192bb21-6c91-42cd-9aaa-3cb4372b0ee4,393062a3-8ef7-4f0d-9035-b4ba3b316f88,1eef808b-293c-482d-96c7-12b5b29a2055,47a94f88-4a88-4518-bdae-5ca889db2c00,33a2c47f-f97b-4edb-93dd-bc07d6694840,9be9bbea-26df-4537-ba05-158c732b3701,6a8968b9-6349-4d4d-841c-a11dce30a111,2c2e4ad9-a8bc-43ac-b79f-bf8ff6bf06eb"
+#!   FME_GEOMETRY_HANDLING="Enhanced"
+#!   FME_IMPLICIT_CSMAP_REPROJECTION_MODE="Auto"
+#!   FME_NAMES_ENCODING="UTF-8"
+#!   FME_REPROJECTION_ENGINE="FME"
+#!   FME_SERVER_SERVICES=""
+#!   FME_STROKE_MAX_DEVIATION="0"
+#!   HISTORY=""
+#!   IGNORE_READER_FAILURE="No"
+#!   LAST_SAVE_BUILD="FME(R) 2024.1.3.0 (20240927 - Build 24627 - WIN64)"
+#!   LAST_SAVE_DATE="2025-09-27T22:58:34"
+#!   LOG_FILE=""
+#!   LOG_MAX_RECORDED_FEATURES="200"
+#!   MARKDOWN_DESCRIPTION=""
+#!   MARKDOWN_USAGE=""
+#!   MAX_LOG_FEATURES="200"
+#!   MULTI_WRITER_DATASET_ORDER="BY_ID"
+#!   PASSWORD=""
+#!   PYTHON_COMPATIBILITY="312"
+#!   REDIRECT_TERMINATORS="NONE"
+#!   SAVE_ON_PROMPT_AND_RUN="Yes"
+#!   SHOW_ANNOTATIONS="true"
+#!   SHOW_INFO_NODES="true"
+#!   SOURCE="NONE"
+#!   SOURCE_ROUTING_FILE=""
+#!   TERMINATE_REJECTED="YES"
+#!   TITLE=""
+#!   USAGE=""
+#!   USE_MARKDOWN=""
+#!   VIEW_POSITION="-8.33342 -200.002"
+#!   WARN_INVALID_XFORM_PARAM="Yes"
+#!   WORKSPACE_VERSION="1"
+#!   ZOOM_SCALE="75"
+#! >
+#! <DATASETS>
+#! <DATASET
+#!   IS_SOURCE="false"
+#!   ROLE="WRITER"
+#!   FORMAT="SVG"
+#!   DATASET="$(DestDataset_SVG)"
+#!   KEYWORD="SVG_1"
+#!   MULTI_GEOM_ALLOWED="true"
+#!   ATTR_MAX_LENGTH="255"
+#!   ATTR_CASE="ANY"
+#!   ALLOWED_FEAT_TYPES=""
+#!   WRITE_DEFS="true"
+#!   DEFLINE_TEMPLATE="SVG_PAINT_ORDER 1 SVG_LAYER_STYLE &quot;&quot;"
+#!   DEFLINE_ATTRS="true"
+#!   EXPOSABLE_ATTRS="fme_basename char(50) fme_color char(50) fme_dataset char(50) fme_feature_type char(50) fme_fill_color char(50) fme_geometry char(50) fme_primary_axis float fme_rotation float fme_secondary_axis float fme_start_angle float fme_sweep_angle float fme_text_size float fme_text_string char(50) fme_type char(50) svg_class char(255) svg_color char(50) svg_fill_color char(50) svg_id char(255) svg_onactivate char(255) svg_onclick char(255) svg_onfocusin char(255) svg_onfocusout char(255) svg_onmousedown char(255) svg_onmousemove char(255) svg_onmouseout char(255) svg_onmouseover char(255) svg_onmouseup char(255) svg_primary_axis char(50) svg_rotation char(50) svg_secondary_axis char(50) svg_start_angle char(50) svg_style char(255) svg_sweep_angle char(50) svg_text_size char(50) svg_text_string char(50) svg_type char(255) svg_use char(255)"
+#!   DEFLINE_PARMS="&quot;GUI OPTIONAL NAMEDGROUP svg_layer_group SVG_PAINT_ORDER%SVG_LAYER_STYLE Layer&quot; &quot;&quot; &quot;GUI TEXT SVG_PAINT_ORDER Paint Order&quot; 1 &quot;GUI OPTIONAL TEXT SVG_LAYER_STYLE &apos;Style&apos; Attribute&quot; &quot;&quot; "
+#!   ATTR_INDEX_TYPES=""
+#!   ATTR_NAME_INVALID_CHARS=""
+#!   SUPPORTS_FEATURE_TYPE_FANOUT="true"
+#!   ENABLED="true"
+#!   DYNAMIC_FEATURE_TYPES_LIST_ON_MERGE="true"
+#!   DATASET_TYPE="FILE"
+#!   FTTR_TYPE=""
+#!   GENERATE_FME_BUILD_NUM="24627"
+#!   COORDSYS=""
+#!   FANOUT_EXPRESSION="&lt;Unused&gt;"
+#!   FANOUT_GROUP="NO"
+#! >
+#! <METAFILE_PARAMETER
+#!   NAME="MIME_TYPE"
+#!   VALUE="image/svg+xml"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="WRITER_DATASET_HINT"
+#!   VALUE="Specify a name for the SVG file"
+#! />
+#! </DATASET>
+#! </DATASETS>
+#! <DATA_TYPES>
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_varchar(width)"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_varbinary(width)"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_char(width)"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_binary(width)"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_buffer"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_binarybuffer"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_xml"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_json"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="datetime"
+#!   FME_TYPE="fme_datetime"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="time"
+#!   FME_TYPE="fme_time"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="date"
+#!   FME_TYPE="fme_date"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="decimal(width,decimal)"
+#!   FME_TYPE="fme_decimal(width,decimal)"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="float"
+#!   FME_TYPE="fme_real64"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="float"
+#!   FME_TYPE="fme_real32"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="integer"
+#!   FME_TYPE="fme_int32"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="largeint"
+#!   FME_TYPE="fme_int64"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="decimal(20,0)"
+#!   FME_TYPE="fme_uint64"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="largeint"
+#!   FME_TYPE="fme_uint32"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="logical"
+#!   FME_TYPE="fme_boolean"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="smallint"
+#!   FME_TYPE="fme_int16"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="integer"
+#!   FME_TYPE="fme_uint16"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="smallint"
+#!   FME_TYPE="fme_int8"
+#!   FORMAT="SVG"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="smallint"
+#!   FME_TYPE="fme_uint8"
+#!   FORMAT="SVG"
+#! />
+#! </DATA_TYPES>
+#! <GEOM_TYPES>
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_point"
+#!   FME_TYPE="fme_point"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_line"
+#!   FME_TYPE="fme_line"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_polygon"
+#!   FME_TYPE="fme_area"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_text"
+#!   FME_TYPE="fme_text"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_ellipse"
+#!   FME_TYPE="fme_ellipse"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_arc"
+#!   FME_TYPE="fme_arc"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_rectangle"
+#!   FME_TYPE="fme_rectangle"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_rounded_rectangle"
+#!   FME_TYPE="fme_rounded_rectangle"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_no_geom"
+#!   FME_TYPE="fme_no_geom"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_polygon"
+#!   FME_TYPE="fme_raster"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_line"
+#!   FME_TYPE="fme_surface"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_line"
+#!   FME_TYPE="fme_solid"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_polygon"
+#!   FME_TYPE="fme_point_cloud"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_polygon"
+#!   FME_TYPE="fme_voxel_grid"
+#!   FORMAT="SVG"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="false"
+#!   FORMAT_TYPE="svg_no_geom"
+#!   FME_TYPE="fme_collection"
+#!   FORMAT="SVG"
+#! />
+#! </GEOM_TYPES>
+#! <FEATURE_TYPES>
+#! <FEATURE_TYPE
+#!   IS_SOURCE="false"
+#!   NODE_NAME="test"
+#!   FEATURE_TYPE_NAME=""
+#!   FEATURE_TYPE_NAME_QUALIFIER=""
+#!   IS_EDITABLE="false"
+#!   IDENTIFIER="2"
+#!   FEAT_NAMEDGEOMTYPE=""
+#!   POSITION="3384.6028873336868 -897.25706257062586"
+#!   BOUNDING_RECT="3384.6028873336868 -897.25706257062586 679.63615636156328 65"
+#!   ORDER="500000000000008"
+#!   COLLAPSED="true"
+#!   KEYWORD="SVG_1"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   SCHEMA_ATTRIBUTE_SOURCE="0"
+#! >
+#!     <FEAT_ATTRIBUTE ATTR_NAME="_creation_instance" ATTR_TYPE="decimal(20,0)" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <FEAT_ATTRIBUTE ATTR_NAME="i" ATTR_TYPE="char(20000)" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="SVG_LAYER_STYLE" PARM_VALUE=""/>
+#!     <DEFLINE_PARM PARM_NAME="SVG_PAINT_ORDER" PARM_VALUE="1"/>
+#!     <DEFLINE_PARM PARM_NAME="svg_layer_group" PARM_VALUE=""/>
+#! </FEATURE_TYPE>
+#! </FEATURE_TYPES>
+#! <FMESERVER>
+#! <WRITER_DATASETS>
+#! <DATASET
+#!   NAME="SVG_1"
+#!   OVERRIDE="-SVG_1_DATASET"
+#!   DATASET="SVG_1/asset.svg"
+#! />
+#! </WRITER_DATASETS>
+#! </FMESERVER>
+#! <GLOBAL_PARAMETERS>
+#! <GLOBAL_PARAMETER
+#!   GUI_LINE="GUI FILENAME DestDataset_SVG SVG/Compressed_SVG_Files(*.svg;*.svgz)|*.svg;*.svgz|SVG_Files(*.svg)|*.svg|Compressed_SVG_Files(*.svgz)|*.svgz|All_Files(*)|* Destination SVG (ScalableVectorGraphics) File:"
+#!   DEFAULT_VALUE=".\asset.svg"
+#!   IS_STAND_ALONE="false"
+#! />
+#! </GLOBAL_PARAMETERS>
+#! <USER_PARAMETERS
+#!   FORM="eyJwYXJhbWV0ZXJzIjpbeyJuYW1lIjoiRGVzdERhdGFzZXRfU1ZHIiwicHJvbXB0IjoiRGVzdGluYXRpb24gU1ZHIChTY2FsYWJsZVZlY3RvckdyYXBoaWNzKSBGaWxlOiIsInZhbHVlVHlwZSI6InN0cmluZyIsInJlcXVpcmVkIjp0cnVlLCJkZWZhdWx0VmFsdWUiOiIuXFxhc3NldC5zdmciLCJzdXBwb3J0ZWRWYWx1ZVR5cGVzIjpbImdsb2JhbFBhcmFtZXRlciJdLCJ0eXBlIjoiZmlsZSIsInNlbGVjdE11bHRpcGxlIjpmYWxzZSwiaXRlbXNUb1NlbGVjdCI6ImZpbGVzIiwiYWNjZXNzTW9kZSI6IndyaXRlIiwidmFsaWRhdGVFeGlzdGVuY2UiOmZhbHNlLCJmaWx0ZXJzIjpbeyJkZXNjcmlwdGlvbiI6IlNWRy9Db21wcmVzc2VkIFNWRyBGaWxlcyIsImZpbHRlciI6WyIqLnN2ZyIsIiouc3ZneiJdfSx7ImRlc2NyaXB0aW9uIjoiU1ZHIEZpbGVzIiwiZmlsdGVyIjpbIiouc3ZnIl19LHsiZGVzY3JpcHRpb24iOiJDb21wcmVzc2VkIFNWRyBGaWxlcyIsImZpbHRlciI6WyIqLnN2Z3oiXX0seyJkZXNjcmlwdGlvbiI6IkFsbCBGaWxlcyIsImZpbHRlciI6WyIqIl19XX1dfQ=="
+#! >
+#! <PARAMETER_INFO>
+#!     <INFO NAME="DestDataset_SVG" 
+#!   DEFAULT_VALUE=".\asset.svg"
+#!   SCOPE="DEPENDENT"
+#!   GENERATED_GUI_LINE="true"
+#!   GUI_LINE="GUI FILENAME DestDataset_SVG SVG/Compressed_SVG_Files(*.svg;*.svgz)|*.svg;*.svgz|SVG_Files(*.svg)|*.svg|Compressed_SVG_Files(*.svgz)|*.svgz|All_Files(*)|* Destination SVG (ScalableVectorGraphics) File:"
+#! />
+#! </PARAMETER_INFO>
+#! </USER_PARAMETERS>
+#! <COMMENTS>
+#! <COMMENT
+#!   IDENTIFIER="9"
+#!   COMMENT_VALUE="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;&#10;&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;&#10;p, li { white-space: pre-wrap; }&#10;hr { height: 1px; border-width: 0; }&#10;li.unchecked::marker { content: &quot;\2610&quot;; }&#10;li.checked::marker { content: &quot;\2612&quot;; }&#10;&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Segoe UI&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;herringbone almost  neat &lt;/p&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;credits &lt;/p&gt;&#10;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://editor.p5js.org/areuland/sketches/rQ-RPv_7C&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;https://editor.p5js.org/areuland/sketches/rQ-RPv_7C&lt;/span&gt;&lt;/a&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+#!   POSITION="1234.0306812900399 -506.66211265287268"
+#!   TOP_LEFT="1234.0306812900399 -506.66211265287268"
+#!   BOTTOM_RIGHT="1716.652195005177 -861.665362685373"
+#!   BOUNDING_RECT="1234.0306812900399 -506.66211265287268 482.62151371513716 355.00325003250032"
+#!   ORDER="500000000000003"
+#!   FOLLOW_ANCHOR="true"
+#!   INFO_NODE="false"
+#!   CUSTOM_USER_COLOR="true"
+#!   UUID="{361fa00f-60e3-4008-9a56-79ac9f635495}"
+#!   COLOUR="0,0,0,0.90196078431372551"
+#!   SIZE_POLICY="10"
+#!   ANCHORED_NODE="0"
+#! />
+#! </COMMENTS>
+#! <CONSTANTS>
+#! </CONSTANTS>
+#! <BOOKMARKS>
+#! </BOOKMARKS>
+#! <TRANSFORMERS>
+#! <TRANSFORMER
+#!   IDENTIFIER="3"
+#!   TYPE="Creator"
+#!   VERSION="7"
+#!   POSITION="1234.0306812900399 -897.25706257062586"
+#!   BOUNDING_RECT="1234.0306812900399 -897.25706257062586 436 65"
+#!   ORDER="500000000000001"
+#!   PARMS_EDITED="false"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24627"
+#! >
+#!     <OUTPUT_FEAT NAME="CREATED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="ATEND" PARM_VALUE="no"/>
+#!     <XFORM_PARM PARM_NAME="COORDSYS" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="CRE_ATTR" PARM_VALUE="_creation_instance"/>
+#!     <XFORM_PARM PARM_NAME="GEOJSON" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GEOM" PARM_VALUE="&lt;lt&gt;?xml&lt;space&gt;version=&lt;quote&gt;1.0&lt;quote&gt;&lt;space&gt;encoding=&lt;quote&gt;US_ASCII&lt;quote&gt;&lt;space&gt;standalone=&lt;quote&gt;no&lt;quote&gt;&lt;space&gt;?&lt;gt&gt;&lt;lt&gt;geometry&lt;space&gt;dimension=&lt;quote&gt;2&lt;quote&gt;&lt;gt&gt;&lt;lt&gt;null&lt;solidus&gt;&lt;gt&gt;&lt;lt&gt;&lt;solidus&gt;geometry&lt;gt&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GEOMTYPE" PARM_VALUE="Geometry Object"/>
+#!     <XFORM_PARM PARM_NAME="NUM" PARM_VALUE="1"/>
+#!     <XFORM_PARM PARM_NAME="OAN_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="Creator"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="4"
+#!   TYPE="PythonCaller"
+#!   VERSION="5"
+#!   POSITION="1883.3534994427766 -897.25706257062586"
+#!   BOUNDING_RECT="1883.3534994427766 -897.25706257062586 431 71"
+#!   ORDER="500000000000002"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24627"
+#! >
+#!     <OUTPUT_FEAT NAME="OUTPUT"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="i" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="ADVANCED_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="GROUP_BY" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GROUP_BY_MODE" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="GROUP_PROCESSING_GROUP" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="HIDE_ATTRIBUTES" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="LIST_ATTRS" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="NEW_ATTRIBUTES" PARM_VALUE="i varchar&lt;openparen&gt;20000&lt;closeparen&gt;"/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PYTHONSOURCE" PARM_VALUE="#main_script&lt;lf&gt;import&lt;space&gt;fmeobjects&lt;lf&gt;import&lt;space&gt;random&lt;lf&gt;import&lt;space&gt;numpy&lt;space&gt;as&lt;space&gt;np&lt;lf&gt;from&lt;space&gt;fmeobjects&lt;space&gt;import&lt;space&gt;FMELine&lt;comma&gt;&lt;space&gt;FMEPoint&lt;comma&gt;&lt;space&gt;FMEPolygon&lt;lf&gt;from&lt;space&gt;math&lt;space&gt;import&lt;space&gt;sqrt&lt;comma&gt;&lt;space&gt;sin&lt;comma&gt;&lt;space&gt;cos&lt;comma&gt;&lt;space&gt;pi&lt;comma&gt;&lt;space&gt;degrees&lt;lf&gt;&lt;lf&gt;&lt;lf&gt;width&lt;space&gt;=&lt;space&gt;&lt;space&gt;720&lt;space&gt;&lt;lf&gt;draw_num&lt;space&gt;=&lt;space&gt;4&lt;space&gt;&lt;space&gt;#&lt;space&gt;num&lt;space&gt;circles&lt;space&gt;per&lt;space&gt;direction&lt;lf&gt;draw_size&lt;space&gt;=&lt;space&gt;width&lt;space&gt;&lt;solidus&gt;&lt;space&gt;draw_num&lt;space&gt;&lt;space&gt;#&lt;space&gt;circle&lt;space&gt;size&lt;lf&gt;mark_num&lt;space&gt;=&lt;space&gt;8&lt;space&gt;&lt;space&gt;#&lt;space&gt;number&lt;space&gt;of&lt;space&gt;circle&lt;space&gt;duplicates&lt;space&gt;&lt;lf&gt;mark_size&lt;space&gt;=&lt;space&gt;draw_size&lt;space&gt;&lt;solidus&gt;&lt;space&gt;mark_num&lt;lf&gt;&lt;lf&gt;gridSize&lt;space&gt;=&lt;space&gt;8&lt;lf&gt;tileSize&lt;space&gt;=&lt;space&gt;width&lt;space&gt;&lt;solidus&gt;&lt;space&gt;gridSize&lt;lf&gt;&lt;lf&gt;&lt;lf&gt;from&lt;space&gt;dataclasses&lt;space&gt;import&lt;space&gt;dataclass&lt;lf&gt;&lt;lf&gt;&lt;at&gt;dataclass&lt;lf&gt;class&lt;space&gt;Tile:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;x:&lt;space&gt;int&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;y:&lt;space&gt;int&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;size:&lt;space&gt;int&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;rotation:&lt;space&gt;float&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;flipX:&lt;space&gt;bool&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;flipY:&lt;space&gt;bool&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;draw_arc_half_pi&lt;openparen&gt;self&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_center_point&lt;space&gt;=&lt;space&gt;FMEPoint&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature=&lt;space&gt;fmeobjects.FMEFeature&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_center_point.setXYZ&lt;openparen&gt;self.x&lt;comma&gt;self.y&lt;comma&gt;&lt;space&gt;0&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;rotation&lt;space&gt;=&lt;space&gt;pi*2&lt;space&gt;&lt;solidus&gt;&lt;space&gt;5&lt;space&gt;*&lt;space&gt;2&lt;space&gt;+&lt;space&gt;pi-&lt;space&gt;pi&lt;space&gt;&lt;solidus&gt;&lt;space&gt;10&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature=&lt;space&gt;fmeobjects.FMEFeature&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_arc&lt;space&gt;=&lt;space&gt;fmeobjects.FMEArc&lt;openparen&gt;_center_point&lt;comma&gt;&lt;space&gt;0.0&lt;comma&gt;&lt;space&gt;self.size&lt;comma&gt;&lt;space&gt;self.size&lt;comma&gt;&lt;space&gt;0.0&lt;comma&gt;&lt;space&gt;90.0&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;_arc.rotate2D&lt;openparen&gt;_center_point&lt;comma&gt;&lt;space&gt;float&lt;openparen&gt;degrees&lt;openparen&gt;self.rotation&lt;closeparen&gt;&lt;closeparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature.setGeometry&lt;openparen&gt;_arc&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;return&lt;space&gt;newFeature&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;self.pyoutput&lt;openparen&gt;newFeature&lt;closeparen&gt;&lt;lf&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;draw_triangle&lt;openparen&gt;self&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_center_point&lt;space&gt;=&lt;space&gt;FMEPoint&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;Calculate&lt;space&gt;the&lt;space&gt;vertices&lt;space&gt;of&lt;space&gt;the&lt;space&gt;right&lt;space&gt;triangle&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;half_size&lt;space&gt;=&lt;space&gt;self.size&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;rotation&lt;space&gt;=&lt;space&gt;pi*2&lt;space&gt;&lt;solidus&gt;&lt;space&gt;5&lt;space&gt;*&lt;space&gt;2&lt;space&gt;+&lt;space&gt;pi-&lt;space&gt;pi&lt;space&gt;&lt;solidus&gt;&lt;space&gt;10&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;p1&lt;space&gt;=&lt;space&gt;FMEPoint&lt;openparen&gt;self.x&lt;space&gt;-&lt;space&gt;half_size&lt;comma&gt;&lt;space&gt;self.y&lt;space&gt;-&lt;space&gt;half_size&lt;comma&gt;&lt;space&gt;0&lt;closeparen&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;Bottom-left&lt;space&gt;corner&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;p2&lt;space&gt;=&lt;space&gt;FMEPoint&lt;openparen&gt;self.x&lt;space&gt;+&lt;space&gt;half_size&lt;comma&gt;&lt;space&gt;self.y&lt;space&gt;-&lt;space&gt;half_size&lt;comma&gt;&lt;space&gt;0&lt;closeparen&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;Bottom-right&lt;space&gt;corner&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;p3&lt;space&gt;=&lt;space&gt;FMEPoint&lt;openparen&gt;self.x&lt;space&gt;-&lt;space&gt;half_size&lt;comma&gt;&lt;space&gt;self.y&lt;space&gt;+&lt;space&gt;half_size&lt;comma&gt;&lt;space&gt;0&lt;closeparen&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;Top-left&lt;space&gt;corner&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;Create&lt;space&gt;the&lt;space&gt;triangle&lt;space&gt;geometry&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature&lt;space&gt;=&lt;space&gt;fmeobjects.FMEFeature&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_line&lt;space&gt;=FMELine&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;for&lt;space&gt;i&lt;space&gt;in&lt;space&gt;&lt;openbracket&gt;p1&lt;comma&gt;&lt;space&gt;p2&lt;comma&gt;&lt;space&gt;p3&lt;comma&gt;&lt;space&gt;p1&lt;closebracket&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_line.appendPoint&lt;openparen&gt;i&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#_line.rotate2D&lt;openparen&gt;p3&lt;comma&gt;&lt;space&gt;float&lt;openparen&gt;degrees&lt;openparen&gt;rotation&lt;closeparen&gt;&lt;closeparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature.setGeometry&lt;openparen&gt;_line&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;return&lt;space&gt;newFeature&lt;lf&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;draw&lt;openparen&gt;self&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;feature1&lt;space&gt;=&lt;space&gt;None&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;if&lt;space&gt;self.type&lt;space&gt;==&lt;space&gt;&lt;apos&gt;polygon&lt;apos&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;feature1&lt;space&gt;=&lt;space&gt;self.draw_arc_half_pi&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;elif&lt;space&gt;self.type&lt;space&gt;==&lt;space&gt;&lt;apos&gt;triangle&lt;apos&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;feature1&lt;space&gt;=&lt;space&gt;self.draw_triangle&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;return&lt;space&gt;feature1&lt;lf&gt;&lt;lf&gt;&lt;lf&gt;&lt;lf&gt;class&lt;space&gt;FeatureProcessor&lt;openparen&gt;object&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;__init__&lt;openparen&gt;self&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;pass&lt;lf&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;geometry_group&lt;openparen&gt;self&lt;comma&gt;&lt;space&gt;tx&lt;comma&gt;&lt;space&gt;ty&lt;comma&gt;&lt;space&gt;radius&lt;closeparen&gt;:&lt;space&gt;&lt;lf&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_center_point&lt;space&gt;=&lt;space&gt;FMEPoint&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature=&lt;space&gt;fmeobjects.FMEFeature&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;x&lt;space&gt;=&lt;space&gt;tx&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;y&lt;space&gt;=&lt;space&gt;ty&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_center_point.setXYZ&lt;openparen&gt;x&lt;comma&gt;y&lt;comma&gt;&lt;space&gt;0&lt;closeparen&gt;&lt;lf&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;rotation&lt;space&gt;=&lt;space&gt;pi*2&lt;space&gt;&lt;solidus&gt;&lt;space&gt;5&lt;space&gt;*&lt;space&gt;2&lt;space&gt;+&lt;space&gt;pi-&lt;space&gt;pi&lt;space&gt;&lt;solidus&gt;&lt;space&gt;10&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature=&lt;space&gt;fmeobjects.FMEFeature&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_arc&lt;space&gt;=&lt;space&gt;fmeobjects.FMEArc&lt;openparen&gt;_center_point&lt;comma&gt;&lt;space&gt;0.0&lt;comma&gt;&lt;space&gt;radius&lt;comma&gt;&lt;space&gt;radius&lt;comma&gt;&lt;space&gt;30.0&lt;comma&gt;&lt;space&gt;120.0&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_arc.rotate2D&lt;openparen&gt;_center_point&lt;comma&gt;&lt;space&gt;float&lt;openparen&gt;degrees&lt;openparen&gt;rotation&lt;closeparen&gt;&lt;closeparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;newFeature.setGeometry&lt;openparen&gt;_arc&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;self.pyoutput&lt;openparen&gt;newFeature&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;pattern&lt;openparen&gt;self&lt;comma&gt;&lt;space&gt;size&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;for&lt;space&gt;j&lt;space&gt;in&lt;space&gt;range&lt;openparen&gt;4&lt;space&gt;*&lt;space&gt;&lt;openparen&gt;draw_num&lt;space&gt;+&lt;space&gt;1&lt;closeparen&gt;&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;y&lt;space&gt;=&lt;space&gt;draw_size&lt;space&gt;&lt;solidus&gt;&lt;space&gt;4&lt;space&gt;*&lt;space&gt;j&lt;space&gt;&lt;space&gt;#&lt;space&gt;Move&lt;space&gt;0.25&lt;space&gt;of&lt;space&gt;the&lt;space&gt;size&lt;space&gt;of&lt;space&gt;the&lt;space&gt;circle&lt;space&gt;vertically&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;dx&lt;space&gt;=&lt;space&gt;draw_size&lt;space&gt;&lt;solidus&gt;&lt;space&gt;2&lt;space&gt;if&lt;space&gt;j&lt;space&gt;%&lt;space&gt;2&lt;space&gt;==&lt;space&gt;1&lt;space&gt;else&lt;space&gt;0&lt;space&gt;&lt;space&gt;#&lt;space&gt;move&lt;space&gt;0.5&lt;space&gt;horisontally&lt;space&gt;if&lt;space&gt;vertical&lt;space&gt;direction&lt;space&gt;is&lt;space&gt;odd&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;for&lt;space&gt;i&lt;space&gt;in&lt;space&gt;range&lt;openparen&gt;draw_num&lt;space&gt;+&lt;space&gt;1&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;x&lt;space&gt;=&lt;space&gt;draw_size&lt;space&gt;*&lt;space&gt;i&lt;space&gt;&lt;space&gt;#&lt;space&gt;Move&lt;space&gt;horizontally&lt;space&gt;by&lt;space&gt;one&lt;space&gt;circle&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_start_x&lt;comma&gt;&lt;space&gt;_start_y&lt;space&gt;=&lt;space&gt;x&lt;space&gt;+&lt;space&gt;dx&lt;comma&gt;&lt;space&gt;y&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;time&lt;space&gt;to&lt;space&gt;break&lt;space&gt;it&lt;space&gt;and&lt;space&gt;move&lt;space&gt;to&lt;space&gt;geometry&lt;space&gt;group&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;for&lt;space&gt;k&lt;space&gt;in&lt;space&gt;range&lt;openparen&gt;mark_num&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;radius=mark_size&lt;space&gt;*&lt;space&gt;&lt;openparen&gt;mark_num&lt;space&gt;-&lt;space&gt;k&lt;closeparen&gt;&lt;space&gt;&lt;solidus&gt;&lt;space&gt;2&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#self.geometry_group&lt;openparen&gt;_start_x&lt;comma&gt;&lt;space&gt;_start_y&lt;comma&gt;&lt;space&gt;radius&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;for&lt;space&gt;i&lt;space&gt;in&lt;space&gt;range&lt;openparen&gt;gridSize&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;for&lt;space&gt;j&lt;space&gt;in&lt;space&gt;range&lt;openparen&gt;gridSize&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;Randomly&lt;space&gt;select&lt;space&gt;rotation&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;rotation&lt;space&gt;=&lt;space&gt;random.choice&lt;openparen&gt;&lt;openbracket&gt;0&lt;comma&gt;&lt;space&gt;90&lt;comma&gt;&lt;space&gt;180&lt;comma&gt;&lt;space&gt;270&lt;closebracket&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;flipX&lt;space&gt;=&lt;space&gt;random.choice&lt;openparen&gt;&lt;openbracket&gt;True&lt;comma&gt;&lt;space&gt;False&lt;closebracket&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;flipY&lt;space&gt;=&lt;space&gt;random.choice&lt;openparen&gt;&lt;openbracket&gt;True&lt;comma&gt;&lt;space&gt;False&lt;closebracket&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;tile&lt;space&gt;=&lt;space&gt;Tile&lt;openparen&gt;j&lt;space&gt;*&lt;space&gt;tileSize&lt;comma&gt;&lt;space&gt;i&lt;space&gt;*&lt;space&gt;tileSize&lt;comma&gt;&lt;space&gt;tileSize&lt;comma&gt;&lt;space&gt;rotation&lt;comma&gt;&lt;space&gt;flipX&lt;comma&gt;&lt;space&gt;flipY&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;tile.type&lt;space&gt;=&lt;space&gt;&lt;apos&gt;polygon&lt;apos&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_tile&lt;space&gt;=&lt;space&gt;tile.draw&lt;openparen&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;self.pyoutput&lt;openparen&gt;_tile&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;tile.type&lt;space&gt;=&lt;space&gt;&lt;apos&gt;triangle&lt;apos&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;_tile&lt;space&gt;=&lt;space&gt;tile.draw&lt;openparen&gt;&lt;closeparen&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;self.pyoutput&lt;openparen&gt;_tile&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;input&lt;openparen&gt;self&lt;comma&gt;&lt;space&gt;feature:&lt;space&gt;fmeobjects.FMEFeature&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;#&lt;space&gt;svg_body&lt;space&gt;=&lt;space&gt;create_svg_no_deps&lt;openparen&gt;datastructure&lt;comma&gt;&lt;apos&gt;foo&lt;apos&gt;&lt;closeparen&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;pass&lt;lf&gt;&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;def&lt;space&gt;close&lt;openparen&gt;self&lt;closeparen&gt;:&lt;lf&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;&lt;space&gt;self.pattern&lt;openparen&gt;draw_size&lt;closeparen&gt;&lt;lf&gt;&lt;lf&gt;&lt;space&gt;"/>
+#!     <XFORM_PARM PARM_NAME="PYTHONSYMBOL" PARM_VALUE="FeatureProcessor"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="PythonCaller_4"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="12"
+#!   TYPE="GeometryFilter"
+#!   VERSION="8"
+#!   POSITION="2458.3579169125019 -897.25706257062586"
+#!   BOUNDING_RECT="2458.3579169125019 -897.25706257062586 436 65"
+#!   ORDER="500000000000011"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24627"
+#! >
+#!     <OUTPUT_FEAT NAME="Curve"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="i" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <OUTPUT_FEAT NAME="Area"/>
+#!     <FEAT_COLLAPSED COLLAPSED="1"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="i" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <OUTPUT_FEAT NAME="&lt;UNFILTERED&gt;"/>
+#!     <FEAT_COLLAPSED COLLAPSED="2"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="2" />
+#!     <XFORM_ATTR ATTR_NAME="i" IS_USER_CREATED="false" FEAT_INDEX="2" />
+#!     <XFORM_PARM PARM_NAME="ADVANCED_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="FILTER_MODE" PARM_VALUE="SIMPLE"/>
+#!     <XFORM_PARM PARM_NAME="FILTER_MULTI" PARM_VALUE="FILTER_TYPES]&quot;Line Area&quot;]FME_CONTROLLER_QUERY_FILE]]FME_CONTROLLER_CHOICE]Simple"/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE="FME_DISCLOSURE_OPEN"/>
+#!     <XFORM_PARM PARM_NAME="PRESERVE_FEATURE_ORDER" PARM_VALUE="PER_OUTPUT_PORT"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="GeometryFilter"/>
+#! </TRANSFORMER>
+#! <TRANSFORMER
+#!   IDENTIFIER="10"
+#!   TYPE="Bufferer"
+#!   VERSION="17"
+#!   POSITION="2458.3579169125019 -1291.6795834625011"
+#!   BOUNDING_RECT="2458.3579169125019 -1291.6795834625011 436 65"
+#!   ORDER="500000000000013"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="24627"
+#! >
+#!     <OUTPUT_FEAT NAME="BUFFERED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_ATTR ATTR_NAME="i" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <OUTPUT_FEAT NAME="&lt;REJECTED&gt;"/>
+#!     <FEAT_COLLAPSED COLLAPSED="1"/>
+#!     <XFORM_ATTR ATTR_NAME="_creation_instance" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="i" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_ATTR ATTR_NAME="fme_rejection_code" IS_USER_CREATED="false" FEAT_INDEX="1" />
+#!     <XFORM_PARM PARM_NAME="ANGLE" PARM_VALUE="22.5"/>
+#!     <XFORM_PARM PARM_NAME="AREA_GROUP" PARM_VALUE="FME_DISCLOSURE_OPEN"/>
+#!     <XFORM_PARM PARM_NAME="CAP_STYLE_LOOKUP" PARM_VALUE="CAP_BUTT"/>
+#!     <XFORM_PARM PARM_NAME="CORNER_STYLE_LOOKUP" PARM_VALUE="JOIN_ARC"/>
+#!     <XFORM_PARM PARM_NAME="GENERATE_LIST_GROUP" PARM_VALUE="NO"/>
+#!     <XFORM_PARM PARM_NAME="GROUP_BY" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="GROUP_BY_MODE" PARM_VALUE="No"/>
+#!     <XFORM_PARM PARM_NAME="LIST_ATTRS_TO_INCLUDE" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="LIST_ATTRS_TO_INCLUDE_MODE_LU" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="LIST_NAME" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="MITER_LIMIT" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="MODE" PARM_VALUE="AREA"/>
+#!     <XFORM_PARM PARM_NAME="OFFSET" PARM_VALUE="0.5"/>
+#!     <XFORM_PARM PARM_NAME="OFFSET_UNITS" PARM_VALUE="NONE"/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PRECISION" PARM_VALUE="APPROX"/>
+#!     <XFORM_PARM PARM_NAME="SOLID_GROUP" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="SPHERE_DIVISIONS" PARM_VALUE="&lt;Unused&gt;"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="Bufferer"/>
+#!     <XFORM_PARM PARM_NAME="CAP_STYLE" PARM_IS_LOOKUP="true" PARM_VALUE="None"/>
+#!     <XFORM_PARM PARM_NAME="CORNER_STYLE" PARM_IS_LOOKUP="true" PARM_VALUE="Arc"/>
+#!     <XFORM_PARM PARM_NAME="LIST_ATTRS_TO_INCLUDE_MODE" PARM_IS_LOOKUP="true" PARM_VALUE="&lt;Unused&gt;"/>
+#! </TRANSFORMER>
+#! </TRANSFORMERS>
+#! <FEAT_LINKS>
+#! <FEAT_LINK
+#!   IDENTIFIER="6"
+#!   SOURCE_NODE="3"
+#!   TARGET_NODE="4"
+#!   SOURCE_PORT_DESC="fo 0 CREATED"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.95686274509803926,0.95294117647058818,0.92941176470588238,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="13"
+#!   SOURCE_NODE="4"
+#!   TARGET_NODE="12"
+#!   SOURCE_PORT_DESC="fo 0 OUTPUT"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.95686274509803926,0.95294117647058818,0.92941176470588238,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="17"
+#!   SOURCE_NODE="10"
+#!   TARGET_NODE="2"
+#!   SOURCE_PORT_DESC="fo 0 BUFFERED"
+#!   TARGET_PORT_DESC="-1"
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.95686274509803926,0.95294117647058818,0.92941176470588238,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="11"
+#!   SOURCE_NODE="12"
+#!   TARGET_NODE="10"
+#!   SOURCE_PORT_DESC="fo 0 Curve"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.95686274509803926,0.95294117647058818,0.92941176470588238,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! <FEAT_LINK
+#!   IDENTIFIER="14"
+#!   SOURCE_NODE="12"
+#!   TARGET_NODE="10"
+#!   SOURCE_PORT_DESC="fo 1 Area"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.95686274509803926,0.95294117647058818,0.92941176470588238,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! </FEAT_LINKS>
+#! <BREAKPOINTS>
+#! </BREAKPOINTS>
+#! <ATTR_LINKS>
+#! </ATTR_LINKS>
+#! <SUBDOCUMENTS>
+#! </SUBDOCUMENTS>
+#! <LOOKUP_TABLES>
+#! </LOOKUP_TABLES>
+#! </WORKSPACE>
+
+FME_PYTHON_VERSION 312
+ARCGIS_COMPATIBILITY ARCGIS_AUTO
+GUI IGNORE DestDataset_SVG_1,SVG_OUT_FME_GROUP_NAMED1_SVG_1,SVG_OUT_TEMPLATE_SVG_1,SVG_OUT_FME_GROUP_NAMED2_SVG_1,SVG_OUT_COORDINATE_PRECISION_SVG_1,SVG_OUT_NORMALIZE_SVG_1,SVG_OUT_FLIP_Y_COORDINATE_SVG_1,SVG_OUT_WRITER_PARAMETERS_SVG_1,SVG_OUT_ABSOLUTE_COORDINATES_SVG_1,SVG_OUT_WHITE_STROKES_TO_BLACK_SVG_1,SVG_OUT_COLOR_FILLER_SVG_1,SVG_OUT_DOCTYPE_EXTERNAL_SVG_1,SVG_OUT_DOCTYPE_PUBLIC_ID_SVG_1,SVG_OUT_DOCTYPE_SYSTEM_ID_SVG_1,SVG_OUT_VIEWBOX_MINX_SVG_1,SVG_OUT_VIEWBOX_MINY_SVG_1,SVG_OUT_VIEWBOX_WIDTH_SVG_1,SVG_OUT_VIEWBOX_HEIGHT_SVG_1,SVG_OUT_ATTR_NAMESPACE_PREFIX_SVG_1,SVG_OUT_ATTR_NAMESPACE_URI_SVG_1
+# ============================================================================
+DEFAULT_MACRO DestDataset_SVG .\asset.svg
+
+# ============================================================================
+INCLUDE [ if {{$(DestDataset_SVG$encode)} == {}} { puts_real {Parameter 'DestDataset_SVG' must be given a value.}; exit 1; }; ]
+#! START_HEADER
+#! START_WB_HEADER
+READER_TYPE MULTI_READER
+WRITER_TYPE MULTI_WRITER
+WRITER_KEYWORD PRIMARY_DEST
+PRIMARY_DEST_DATASET_ORDER BY_ID
+PRIMARY_DEST_FIRST_WRITER_ID 0
+PRIMARY_DEST_TYPE{0} SVG
+PRIMARY_DEST_KEYWORD{0} SVG_1
+PRIMARY_DEST_GEN_DIRECTIVES{0} ABSOLUTE_COORDINATES,No,DOCTYPE_PUBLIC_ID,,VIEWBOX_MINX,,DOCTYPE_EXTERNAL,Yes,TEMPLATE,C:<backslash>Program<space>Files<backslash>FME<solidus>svg<backslash>defaultTemplate.svg,ATTR_NAMESPACE_URI,,VIEWBOX_MINY,,VIEWBOX_WIDTH,,DESTINATION_DATASETTYPE_VALIDATION,Yes,FLIP_Y_COORDINATE,Yes,COORDINATE_PRECISION,6,VIEWBOX_HEIGHT,,NORMALIZE,Yes,ATTR_NAMESPACE_PREFIX,,COLOR_FILLER,Yes,DOCTYPE_SYSTEM_ID,,ADD_WRITER_NEXT_ACTION,automatic,WHITE_STROKES_TO_BLACK,Yes
+#! END_WB_HEADER
+#! START_WB_HEADER
+MACRO WB_KEYWORD "SVG_1"
+#! END_WB_HEADER
+#! START_DEST_HEADER SVG SVG_1
+# ============================================================================
+# The following GUI line prompts for a file to be used as the
+# the destination for SVG.
+# The user input is stored in a macro, which is then used to define
+# the dataset to be written.
+#! END_DEST_HEADER
+#! START_WB_HEADER
+DEFAULT_MACRO DestDataset
+INCLUDE [ if {"$(DestDataset)" != ""} {                          \
+ puts {DEFAULT_MACRO DestDataset_SVG_1 $(DestDataset)}         \
+ } ]
+#! END_WB_HEADER
+#! START_DEST_HEADER SVG SVG_1
+DEFAULT_MACRO DestDataset_SVG_1 $(DestDataset_SVG)
+GUI FILENAME DestDataset_SVG_1 SVG/Compressed_SVG_Files(*.svg;*.svgz)|*.svg;*.svgz|SVG_Files(*.svg)|*.svg|Compressed_SVG_Files(*.svgz)|*.svgz|All_Files(*)|* Destination SVG (ScalableVectorGraphics) File:
+DEFAULT_MACRO SVG_OUT_FME_GROUP_NAMED1_SVG_1 
+GUI OPTIONAL DISCLOSUREGROUP SVG_OUT_FME_GROUP_NAMED1_SVG_1 SVG_OUT_TEMPLATE_SVG_1 Template File
+# ============================================================================
+# The following GUI line prompts for a file to be used as the
+# the template file as the root of the output SVG document.
+DEFAULT_MACRO SVG_OUT_TEMPLATE_SVG_1 C:\Program Files\FME/svg\defaultTemplate.svg
+SVG_1_TEMPLATE "$(SVG_OUT_TEMPLATE_SVG_1)"
+GUI OPTIONAL FILENAME_MUSTEXIST SVG_OUT_TEMPLATE_SVG_1 SVG(*.svg)|*.svg|All_Files(*)|* Template File
+DEFAULT_MACRO SVG_OUT_FME_GROUP_NAMED2_SVG_1 FME_DISCLOSURE_OPEN
+GUI OPTIONAL DISCLOSUREGROUP SVG_OUT_FME_GROUP_NAMED2_SVG_1 SVG_OUT_COORDINATE_PRECISION_SVG_1%SVG_OUT_NORMALIZE_SVG_1%SVG_OUT_FLIP_Y_COORDINATE_SVG_1 Coordinate Options
+# ============================================================================
+# The following GUI line prompts for the number of digits that should
+# be used when writing coordinate values.
+DEFAULT_MACRO SVG_OUT_COORDINATE_PRECISION_SVG_1 6
+SVG_1_COORDINATE_PRECISION "$(SVG_OUT_COORDINATE_PRECISION_SVG_1)"
+GUI OPTIONAL INTEGER SVG_OUT_COORDINATE_PRECISION_SVG_1 Precision:
+# ============================================================================
+# The following GUI line prompts for a boolean value (Yes|No) that determines
+# whether the lower bounds of a writer's feature set should be normalized to
+# (0,0).
+DEFAULT_MACRO SVG_OUT_NORMALIZE_SVG_1 Yes
+SVG_1_NORMALIZE "$(SVG_OUT_NORMALIZE_SVG_1)"
+GUI OPTIONAL CHECKBOX SVG_OUT_NORMALIZE_SVG_1 Yes%No Normalize:
+DEFAULT_MACRO SVG_OUT_FLIP_Y_COORDINATE_SVG_1 Yes
+SVG_1_FLIP_Y_COORDINATE "$(SVG_OUT_FLIP_Y_COORDINATE_SVG_1)"
+GUI OPTIONAL CHECKBOX SVG_OUT_FLIP_Y_COORDINATE_SVG_1 Yes%No Flip Y Coordinate:
+# ============================================================================
+# Opt in for destination dataset type vs format type validation
+DEFAULT_MACRO SVG_OUT_DESTINATION_DATASETTYPE_VALIDATION_SVG_1 Yes
+SVG_1_DESTINATION_DATASETTYPE_VALIDATION "$(SVG_OUT_DESTINATION_DATASETTYPE_VALIDATION_SVG_1)"
+DEFAULT_MACRO SVG_OUT_WRITER_PARAMETERS_SVG_1 FME_DISCLOSURE_OPEN
+GUI OPTIONAL DISCLOSUREGROUP SVG_OUT_WRITER_PARAMETERS_SVG_1 SVG_OUT_ABSOLUTE_COORDINATES_SVG_1%SVG_OUT_WHITE_STROKES_TO_BLACK_SVG_1%SVG_OUT_COLOR_FILLER_SVG_1%SVG_OUT_DOCTYPE_EXTERNAL_SVG_1%SVG_OUT_DOCTYPE_PUBLIC_ID_SVG_1%SVG_OUT_DOCTYPE_SYSTEM_ID_SVG_1%SVG_OUT_VIEWBOX_MINX_SVG_1%SVG_OUT_VIEWBOX_MINY_SVG_1%SVG_OUT_VIEWBOX_WIDTH_SVG_1%SVG_OUT_VIEWBOX_HEIGHT_SVG_1%SVG_OUT_ATTR_NAMESPACE_PREFIX_SVG_1%SVG_OUT_ATTR_NAMESPACE_URI_SVG_1 Writer Parameters
+# ============================================================================
+# The following GUI line prompts for a boolean value (Yes|No) that determines
+# whether to output absolute or relative coordinates for the <path> element
+# for lines and polygons.
+DEFAULT_MACRO SVG_OUT_ABSOLUTE_COORDINATES_SVG_1 No
+SVG_1_ABSOLUTE_COORDINATES "$(SVG_OUT_ABSOLUTE_COORDINATES_SVG_1)"
+GUI CHOICE SVG_OUT_ABSOLUTE_COORDINATES_SVG_1 Yes%No Use absolute Coordinates
+# ============================================================================
+# The following GUI line prompts for a boolean value (Yes|No) that determines
+# whether the SVG writer should automatically switch white fme_color specifications
+# into black. This directive does not affect the svg_color, that is, the
+# svg_color attribute takes precedence over the fme_color.
+DEFAULT_MACRO SVG_OUT_WHITE_STROKES_TO_BLACK_SVG_1 Yes
+SVG_1_WHITE_STROKES_TO_BLACK "$(SVG_OUT_WHITE_STROKES_TO_BLACK_SVG_1)"
+GUI CHOICE SVG_OUT_WHITE_STROKES_TO_BLACK_SVG_1 Yes%No Automatically turn white strokes into black
+# ============================================================================
+# The following GUI line prompts for a boolean value (Yes|No) that determines
+# whether the fill will be equal to none
+DEFAULT_MACRO SVG_OUT_COLOR_FILLER_SVG_1 Yes
+SVG_1_COLOR_FILLER "$(SVG_OUT_COLOR_FILLER_SVG_1)"
+GUI LOOKUP_CHOICE SVG_OUT_COLOR_FILLER_SVG_1 Yes,Yes%No,No Include the color filler set to none
+# ============================================================================
+# The following GUI line prompts for a boolean value (Yes|No) that determines
+# if the SVG file should depend on an external SVG DTD. The default value is Yes.
+# This keyword when set Yes can be used in conjuction with the DOCTYPE_PUBLIC_ID
+# and the DOCTYPE_SYSTEM_ID to set the public and system identifier for the document
+# declaration type.
+# When this keyword is set to Yes and when both the DOCTYPE_PUBLIC_ID and
+# DOCTYPE_SYSTEM_ID keywords are absent or both have the empty string then
+# the SVG 1.1 system and public identifiers are used by default:
+# <public-identifier> -//W3C//DTD SVG 1.1//EN
+# <system-identifier> http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-flat.dtd
+# This is the flattened SVG 1.1 DTD version.
+DEFAULT_MACRO SVG_OUT_DOCTYPE_EXTERNAL_SVG_1 Yes
+SVG_1_DOCTYPE_EXTERNAL "$(SVG_OUT_DOCTYPE_EXTERNAL_SVG_1)"
+GUI CHOICE SVG_OUT_DOCTYPE_EXTERNAL_SVG_1 Yes%No Reference external SVG DTD
+# ============================================================================
+# The following GUI line applies when DOCTYPE_EXTERNAL is set to Yes. It
+# optionally allows the user to set the public identifier for the SVG document
+# type declaration.
+DEFAULT_MACRO SVG_OUT_DOCTYPE_PUBLIC_ID_SVG_1 
+SVG_1_DOCTYPE_PUBLIC_ID "$(SVG_OUT_DOCTYPE_PUBLIC_ID_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_DOCTYPE_PUBLIC_ID_SVG_1 DOCTYPE public identifier
+# ============================================================================
+# The following GUI line applies when DOCTYPE_EXTERNAL is set to Yes. It
+# optionally allows the user to set the system identifier for the SVG document
+# type declaration.
+DEFAULT_MACRO SVG_OUT_DOCTYPE_SYSTEM_ID_SVG_1 
+SVG_1_DOCTYPE_SYSTEM_ID "$(SVG_OUT_DOCTYPE_SYSTEM_ID_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_DOCTYPE_SYSTEM_ID_SVG_1 DOCTYPE system identifier
+# ============================================================================
+# The following GUI line applies allows the user to optionally enter a different
+# namespace prefix to use. The default prefix is fme.
+DEFAULT_MACRO SVG_OUT_VIEWBOX_MINX_SVG_1 
+SVG_1_VIEWBOX_MINX "$(SVG_OUT_VIEWBOX_MINX_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_VIEWBOX_MINX_SVG_1 Viewbox - Min x
+# ============================================================================
+# The following GUI line applies allows the user to optionally enter a different
+# namespace prefix to use. The default prefix is fme.
+DEFAULT_MACRO SVG_OUT_VIEWBOX_MINY_SVG_1 
+SVG_1_VIEWBOX_MINY "$(SVG_OUT_VIEWBOX_MINY_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_VIEWBOX_MINY_SVG_1 Viewbox - Min y
+# ============================================================================
+# The following GUI line applies allows the user to optionally enter a different
+# namespace prefix to use. The default prefix is fme.
+DEFAULT_MACRO SVG_OUT_VIEWBOX_WIDTH_SVG_1 
+SVG_1_VIEWBOX_WIDTH "$(SVG_OUT_VIEWBOX_WIDTH_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_VIEWBOX_WIDTH_SVG_1 Viewbox - Width
+# ============================================================================
+# The following GUI line applies allows the user to optionally enter a different
+# namespace prefix to use. The default prefix is fme.
+DEFAULT_MACRO SVG_OUT_VIEWBOX_HEIGHT_SVG_1 
+SVG_1_VIEWBOX_HEIGHT "$(SVG_OUT_VIEWBOX_HEIGHT_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_VIEWBOX_HEIGHT_SVG_1 Viewbox - Height
+# ============================================================================
+# The following GUI line applies allows the user to optionally enter a different
+# namespace prefix to use. The default prefix is fme.
+DEFAULT_MACRO SVG_OUT_ATTR_NAMESPACE_PREFIX_SVG_1 
+SVG_1_ATTR_NAMESPACE_PREFIX "$(SVG_OUT_ATTR_NAMESPACE_PREFIX_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_ATTR_NAMESPACE_PREFIX_SVG_1 Attributes Namespace Prefix
+# ============================================================================
+# The following GUI line allows the user to optionally enter a different
+# namespace URI. The default is http://www.safe.com/fme
+DEFAULT_MACRO SVG_OUT_ATTR_NAMESPACE_URI_SVG_1 
+SVG_1_ATTR_NAMESPACE_URI "$(SVG_OUT_ATTR_NAMESPACE_URI_SVG_1)"
+GUI OPTIONAL TEXT SVG_OUT_ATTR_NAMESPACE_URI_SVG_1 Attributes Namespace URI
+# ============================================================================
+SVG_1_GENERATE_FME_BUILD_NUM 24627
+SVG_1_DATASET "$(DestDataset_SVG_1)"
+#! END_DEST_HEADER
+#! START_WB_HEADER
+#! END_WB_HEADER
+#! END_HEADER
+
+LOG_FILENAME "$(FME_MF_DIR)lines.log"
+LOG_APPEND NO
+LOG_MAX_FEATURES 200
+LOG_MAX_RECORDED_FEATURES 200
+FME_REPROJECTION_ENGINE FME
+FME_IMPLICIT_CSMAP_REPROJECTION_MODE Auto
+FME_GEOMETRY_HANDLING Enhanced
+FME_STROKE_MAX_DEVIATION 0
+FME_NAMES_ENCODING UTF-8
+FME_BULK_MODE_THRESHOLD 2000
+LAST_SAVE_BUILD "FME 2024.1.3.0 (20240927 - Build 24627 - WIN64)"
+DEFAULT_MACRO DATASET_KEYWORD_SVG_1 SVG_1
+# -------------------------------------------------------------------------
+
+MULTI_READER_CONTINUE_ON_READER_FAILURE No
+FME_BEGIN_PYTHON_ENC import<space>fme<lf>print<openparen>dir<openparen>fme<closeparen><closeparen><lf>
+
+# -------------------------------------------------------------------------
+
+MACRO WORKSPACE_NAME lines
+MACRO FME_VIEWER_APP fmedatainspector
+DEFAULT_MACRO WB_CURRENT_CONTEXT
+# -------------------------------------------------------------------------
+Tcl2 proc Creator_CoordSysRemover {} {   global FME_CoordSys;   set FME_CoordSys {}; }
+MACRO Creator_XML     NOT_ACTIVATED
+MACRO Creator_GEOJSON NOT_ACTIVATED
+INCLUDE [ if { {Geometry Object} == {Geometry Object} } {            puts {MACRO Creator_XML *} } ]
+INCLUDE [ if { {Geometry Object} == {GeoJSON} } {            puts {MACRO Creator_GEOJSON *} } ]
+FACTORY_DEF {$(Creator_XML)} CreationFactory    FACTORY_NAME { Creator_XML_Creator }    CREATE_AT_END { no }    OUTPUT { FEATURE_TYPE _____CREATED______        @Geometry(FROM_ENCODED_STRING,<lt>?xml<space>version=<quote>1.0<quote><space>encoding=<quote>US_ASCII<quote><space>standalone=<quote>no<quote><space>?<gt><lt>geometry<space>dimension=<quote>2<quote><gt><lt>null<solidus><gt><lt><solidus>geometry<gt>) }
+FACTORY_DEF {$(Creator_GEOJSON)} CreationFactory    FACTORY_NAME { Creator_GEOJSON_Creator }    CREATE_AT_END { no }    OUTPUT { FEATURE_TYPE _____CREATED______ 	   @SupplyAttributes(ENCODED,__GeoJSONCreatorTemp__,<Unused>)        @JSONGeometry(FROM_ATTRIBUTE,GEOJSON,__GeoJSONCreatorTemp__, PREFER_ERROR_OVER_REJECTION) 	   @RemoveAttributes(__GeoJSONCreatorTemp__) }
+FACTORY_DEF {*} TeeFactory    FACTORY_NAME { Creator_Cloner }    INPUT FEATURE_TYPE _____CREATED______        @Tcl2(Creator_CoordSysRemover)        @CoordSys()    NUMBER_OF_COPIES { 1 }    COPY_NUMBER_ATTRIBUTE { "_creation_instance" }    OUTPUT { FEATURE_TYPE Creator_CREATED        fme_feature_type Creator         }
+FACTORY_DEF * BranchingFactory   FACTORY_NAME "Creator_CREATED Brancher -1 6"   INPUT FEATURE_TYPE Creator_CREATED   TARGET_FACTORY "$(WB_CURRENT_CONTEXT)_CREATOR_BRANCH_TARGET"   MAXIMUM_COUNT None   OUTPUT PASSED FEATURE_TYPE *
+# -------------------------------------------------------------------------
+FACTORY_DEF * TeeFactory   FACTORY_NAME "$(WB_CURRENT_CONTEXT)_CREATOR_BRANCH_TARGET"   INPUT FEATURE_TYPE *  OUTPUT FEATURE_TYPE *
+# -------------------------------------------------------------------------
+FME_PYTHON_PATH "$(FME_MF_DIR)"
+FACTORY_DEF {*} PythonFactory    FACTORY_NAME { PythonCaller_4 }    FLUSH_WHEN_GROUPS_CHANGE { <Unused> }    INPUT  FEATURE_TYPE Creator_CREATED    SYMBOL_NAME { FeatureProcessor }    SOURCE_CODE { #main_script<lf>import<space>fmeobjects<lf>import<space>random<lf>import<space>numpy<space>as<space>np<lf>from<space>fmeobjects<space>import<space>FMELine<comma><space>FMEPoint<comma><space>FMEPolygon<lf>from<space>math<space>import<space>sqrt<comma><space>sin<comma><space>cos<comma><space>pi<comma><space>degrees<lf><lf><lf>width<space>=<space><space>720<space><lf>draw_num<space>=<space>4<space><space>#<space>num<space>circles<space>per<space>direction<lf>draw_size<space>=<space>width<space><solidus><space>draw_num<space><space>#<space>circle<space>size<lf>mark_num<space>=<space>8<space><space>#<space>number<space>of<space>circle<space>duplicates<space><lf>mark_size<space>=<space>draw_size<space><solidus><space>mark_num<lf><lf>gridSize<space>=<space>8<lf>tileSize<space>=<space>width<space><solidus><space>gridSize<lf><lf><lf>from<space>dataclasses<space>import<space>dataclass<lf><lf><at>dataclass<lf>class<space>Tile:<lf><space><space><space><space>x:<space>int<lf><space><space><space><space>y:<space>int<lf><space><space><space><space>size:<space>int<lf><space><space><space><space>rotation:<space>float<lf><space><space><space><space>flipX:<space>bool<lf><space><space><space><space>flipY:<space>bool<lf><space><space><space><space><lf><space><space><space><space><lf><space><space><space><space>def<space>draw_arc_half_pi<openparen>self<closeparen>:<lf><space><space><space><space><space><space><space><space>_center_point<space>=<space>FMEPoint<openparen><closeparen><lf><space><space><space><space><space><space><space><space>newFeature=<space>fmeobjects.FMEFeature<openparen><closeparen><lf><space><space><space><space><space><space><space><space>_center_point.setXYZ<openparen>self.x<comma>self.y<comma><space>0<closeparen><lf><space><space><space><space><space><space><space><space>rotation<space>=<space>pi*2<space><solidus><space>5<space>*<space>2<space>+<space>pi-<space>pi<space><solidus><space>10<space><space><space><space><lf><space><space><space><space><space><space><space><space>newFeature=<space>fmeobjects.FMEFeature<openparen><closeparen><lf><space><space><space><space><space><space><space><space>_arc<space>=<space>fmeobjects.FMEArc<openparen>_center_point<comma><space>0.0<comma><space>self.size<comma><space>self.size<comma><space>0.0<comma><space>90.0<closeparen><lf><space><space><space><space><space><space><space><space>#<space>_arc.rotate2D<openparen>_center_point<comma><space>float<openparen>degrees<openparen>self.rotation<closeparen><closeparen><closeparen><lf><space><space><space><space><space><space><space><space>newFeature.setGeometry<openparen>_arc<closeparen><lf><space><space><space><space><space><space><space><space>return<space>newFeature<lf><space><space><space><space><space><space><space><space>#<space>self.pyoutput<openparen>newFeature<closeparen><lf><lf><space><space><space><space>def<space>draw_triangle<openparen>self<closeparen>:<lf><space><space><space><space><space><space><space><space>_center_point<space>=<space>FMEPoint<openparen><closeparen><lf><space><space><space><space><space><space><space><space>#<space>Calculate<space>the<space>vertices<space>of<space>the<space>right<space>triangle<lf><space><space><space><space><space><space><space><space>half_size<space>=<space>self.size<space><lf><space><space><space><space><space><space><space><space>rotation<space>=<space>pi*2<space><solidus><space>5<space>*<space>2<space>+<space>pi-<space>pi<space><solidus><space>10<space><space><space><space><lf><space><space><space><space><space><space><space><space>p1<space>=<space>FMEPoint<openparen>self.x<space>-<space>half_size<comma><space>self.y<space>-<space>half_size<comma><space>0<closeparen><space><space>#<space>Bottom-left<space>corner<lf><space><space><space><space><space><space><space><space>p2<space>=<space>FMEPoint<openparen>self.x<space>+<space>half_size<comma><space>self.y<space>-<space>half_size<comma><space>0<closeparen><space><space>#<space>Bottom-right<space>corner<lf><space><space><space><space><space><space><space><space>p3<space>=<space>FMEPoint<openparen>self.x<space>-<space>half_size<comma><space>self.y<space>+<space>half_size<comma><space>0<closeparen><space><space>#<space>Top-left<space>corner<lf><space><space><space><space><space><space><space><space>#<space>Create<space>the<space>triangle<space>geometry<lf><space><space><space><space><space><space><space><space>newFeature<space>=<space>fmeobjects.FMEFeature<openparen><closeparen><lf><space><space><space><space><space><space><space><space><lf><space><space><space><space><space><space><space><space>_line<space>=FMELine<openparen><closeparen><lf><space><space><space><space><space><space><space><space>for<space>i<space>in<space><openbracket>p1<comma><space>p2<comma><space>p3<comma><space>p1<closebracket>:<lf><space><space><space><space><space><space><space><space><space><space><space><space>_line.appendPoint<openparen>i<closeparen><lf><space><space><space><space><space><space><space><space>#_line.rotate2D<openparen>p3<comma><space>float<openparen>degrees<openparen>rotation<closeparen><closeparen><closeparen><lf><space><space><space><space><space><space><space><space>newFeature.setGeometry<openparen>_line<closeparen><lf><space><space><space><space><space><space><space><space>return<space>newFeature<lf><lf><space><space><space><space>def<space>draw<openparen>self<closeparen>:<lf><space><space><space><space><space><space><space><space>feature1<space>=<space>None<lf><space><space><space><space><space><space><space><space>if<space>self.type<space>==<space><apos>polygon<apos>:<lf><space><space><space><space><space><space><space><space><space><space><space><space>feature1<space>=<space>self.draw_arc_half_pi<openparen><closeparen><lf><space><space><space><space><space><space><space><space>elif<space>self.type<space>==<space><apos>triangle<apos>:<lf><space><space><space><space><space><space><space><space><space><space><space><space>feature1<space>=<space>self.draw_triangle<openparen><closeparen><lf><space><space><space><space><space><space><space><space>return<space>feature1<lf><lf><lf><lf>class<space>FeatureProcessor<openparen>object<closeparen>:<lf><space><space><space><space>def<space>__init__<openparen>self<closeparen>:<lf><space><space><space><space><space><space><space><space>pass<lf><lf><space><space><space><space>def<space>geometry_group<openparen>self<comma><space>tx<comma><space>ty<comma><space>radius<closeparen>:<space><lf><lf><space><space><space><space><space><space><space><space>_center_point<space>=<space>FMEPoint<openparen><closeparen><lf><space><space><space><space><space><space><space><space><lf><space><space><space><space><space><space><space><space>newFeature=<space>fmeobjects.FMEFeature<openparen><closeparen><lf><space><space><space><space><space><space><space><space>x<space>=<space>tx<lf><space><space><space><space><space><space><space><space>y<space>=<space>ty<lf><space><space><space><space><space><space><space><space>_center_point.setXYZ<openparen>x<comma>y<comma><space>0<closeparen><lf><lf><space><space><space><space><space><space><space><space>rotation<space>=<space>pi*2<space><solidus><space>5<space>*<space>2<space>+<space>pi-<space>pi<space><solidus><space>10<space><space><space><space><lf><space><space><space><space><space><space><space><space>newFeature=<space>fmeobjects.FMEFeature<openparen><closeparen><lf><space><space><space><space><space><space><space><space>_arc<space>=<space>fmeobjects.FMEArc<openparen>_center_point<comma><space>0.0<comma><space>radius<comma><space>radius<comma><space>30.0<comma><space>120.0<closeparen><lf><space><space><space><space><space><space><space><space>_arc.rotate2D<openparen>_center_point<comma><space>float<openparen>degrees<openparen>rotation<closeparen><closeparen><closeparen><lf><space><space><space><space><space><space><space><space>newFeature.setGeometry<openparen>_arc<closeparen><lf><space><space><space><space><space><space><space><space>self.pyoutput<openparen>newFeature<closeparen><lf><space><space><space><space><lf><space><space><space><space>def<space>pattern<openparen>self<comma><space>size<closeparen>:<lf><space><space><space><space><space><space><space><space>for<space>j<space>in<space>range<openparen>4<space>*<space><openparen>draw_num<space>+<space>1<closeparen><closeparen>:<lf><space><space><space><space><space><space><space><space><space><space><space><space>y<space>=<space>draw_size<space><solidus><space>4<space>*<space>j<space><space>#<space>Move<space>0.25<space>of<space>the<space>size<space>of<space>the<space>circle<space>vertically<space><lf><space><space><space><space><space><space><space><space><space><space><space><space>dx<space>=<space>draw_size<space><solidus><space>2<space>if<space>j<space>%<space>2<space>==<space>1<space>else<space>0<space><space>#<space>move<space>0.5<space>horisontally<space>if<space>vertical<space>direction<space>is<space>odd<lf><space><space><space><space><space><space><space><space><space><space><space><space>for<space>i<space>in<space>range<openparen>draw_num<space>+<space>1<closeparen>:<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space>x<space>=<space>draw_size<space>*<space>i<space><space>#<space>Move<space>horizontally<space>by<space>one<space>circle<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space>_start_x<comma><space>_start_y<space>=<space>x<space>+<space>dx<comma><space>y<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space>#<space>time<space>to<space>break<space>it<space>and<space>move<space>to<space>geometry<space>group<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space>for<space>k<space>in<space>range<openparen>mark_num<closeparen>:<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space>radius=mark_size<space>*<space><openparen>mark_num<space>-<space>k<closeparen><space><solidus><space>2<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space><space>#self.geometry_group<openparen>_start_x<comma><space>_start_y<comma><space>radius<closeparen><lf><space><space><space><space><space><space><space><space><lf><space><space><space><space><space><space><space><space>for<space>i<space>in<space>range<openparen>gridSize<closeparen>:<lf><space><space><space><space><space><space><space><space><space><space><space><space>for<space>j<space>in<space>range<openparen>gridSize<closeparen>:<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>#<space>Randomly<space>select<space>rotation<lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>rotation<space>=<space>random.choice<openparen><openbracket>0<comma><space>90<comma><space>180<comma><space>270<closebracket><closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>flipX<space>=<space>random.choice<openparen><openbracket>True<comma><space>False<closebracket><closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>flipY<space>=<space>random.choice<openparen><openbracket>True<comma><space>False<closebracket><closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>tile<space>=<space>Tile<openparen>j<space>*<space>tileSize<comma><space>i<space>*<space>tileSize<comma><space>tileSize<comma><space>rotation<comma><space>flipX<comma><space>flipY<closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>tile.type<space>=<space><apos>polygon<apos><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>_tile<space>=<space>tile.draw<openparen><closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>self.pyoutput<openparen>_tile<closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>tile.type<space>=<space><apos>triangle<apos><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>_tile<space>=<space>tile.draw<openparen><closeparen><space><space><space><space><space><space><space><space><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space>self.pyoutput<openparen>_tile<closeparen><lf><space><space><space><space><space><space><space><space><space><space><space><space><space><space><lf><space><space><space><space>def<space>input<openparen>self<comma><space>feature:<space>fmeobjects.FMEFeature<closeparen>:<lf><space><space><space><space><space><space><space><space>#<space>svg_body<space>=<space>create_svg_no_deps<openparen>datastructure<comma><apos>foo<apos><closeparen><lf><space><space><space><space><space><space><space><space>pass<lf><lf><space><space><space><space>def<space>close<openparen>self<closeparen>:<lf><space><space><space><space><space><space><space><space>self.pattern<openparen>draw_size<closeparen><lf><lf><space> }    OUTPUT { PYOUTPUT FEATURE_TYPE PythonCaller_4_OUTPUT         }
+# -------------------------------------------------------------------------
+FACTORY_DEF {*} GeometryFilterFactory    COMMAND_PARM_EVALUATION SINGLE_PASS    FACTORY_NAME { GeometryFilter }    INPUT  FEATURE_TYPE PythonCaller_4_OUTPUT    PRESERVE_FEATURE_ORDER { PER_OUTPUT_PORT }    FILTER_TYPES { Area,Curve }    INSTANCES { INSTANTIATE }    BREAK_AGG { Yes }    OUTPUT { <UNFILTERED> FEATURE_TYPE GeometryFilter_<UNFILTERED>  }    OUTPUT { Area FEATURE_TYPE GeometryFilter_Area  }    OUTPUT { Curve FEATURE_TYPE GeometryFilter_Curve  }
+FACTORY_DEF * TeeFactory   FACTORY_NAME "GeometryFilter <UNFILTERED> Transformer Output Nuker"   INPUT FEATURE_TYPE GeometryFilter_<UNFILTERED>
+# -------------------------------------------------------------------------
+# 20210313 - Use Macros to engage/disengage the solid vs. 2d buffering rather than a runtime
+# check to reduce processing overhead
+INCLUDE [if { ("JOIN_ARC" == "JOIN_MITER") } {         } else {             puts "MACRO MITER_TO_USE 0"         };         if { ("AREA" == "SOLID") } {             puts "MACRO SOLIDFACTORYENGAGED *";             puts "MACRO DISSOLVEFACTORYENGAGED NO";         } else {             puts "MACRO SOLIDFACTORYENGAGED NO";             puts "MACRO DISSOLVEFACTORYENGAGED *";         };         ]
+#
+# This is the AREA part of the buffering:
+#
+FACTORY_DEF {$(DISSOLVEFACTORYENGAGED)} PolygonDissolveFactory    FACTORY_NAME { Bufferer_2DBuffering }    INPUT  FEATURE_TYPE GeometryFilter_Curve    INPUT  FEATURE_TYPE GeometryFilter_Area    FLUSH_WHEN_GROUPS_CHANGE { No }    REJECT_INVALID_GEOM Yes    USE_AZMED_NEIGHBORHOOD Yes    PRE_BUFFER { "0.5" "22.5" "CAP_BUTT" "JOIN_ARC" "$(MITER_TO_USE)" FULL OFFSET_UNITS "NONE" PRECISION "APPROX" }    DISSOLVE_MODE GEOS    CLEANING_TOLERANCE { AUTO }    LIST_ATTRS_TO_INCLUDE { <Unused> }    LIST_ATTRS_TO_INCLUDE_MODE { <Unused> }    OUTPUT { POLYGON FEATURE_TYPE Bufferer_BUFFERED         }    OUTPUT { NON_POLYGON FEATURE_TYPE Bufferer_BUFFERED         }    OUTPUT { REJECTED FEATURE_TYPE Bufferer_<REJECTED>         }
+#
+# This is the SOLID part of the buffering:
+#
+FACTORY_DEF {$(SOLIDFACTORYENGAGED)} SolidBufferingFactory    FACTORY_NAME { Bufferer_3DBuffering }    INPUT  FEATURE_TYPE GeometryFilter_Curve    INPUT  FEATURE_TYPE GeometryFilter_Area    SPHERE_RADIUS { "0.5" }    SPHERE_DIVISIONS { "<Unused>" }    OUTPUT { BUFFERED FEATURE_TYPE Bufferer_BUFFERED        }    OUTPUT { <REJECTED> FEATURE_TYPE Bufferer_<REJECTED>        }
+DEFAULT_MACRO _WB_BYPASS_TERMINATION No
+FACTORY_DEF * TeeFactory FACTORY_NAME Bufferer_<Rejected> INPUT FEATURE_TYPE Bufferer_<REJECTED>  NO_LOGGING   OUTPUT FAILED FEATURE_TYPE * @Abort(ENCODED, Bufferer<space>output<space>a<space><lt>Rejected<gt><space>feature.<space><space>To<space>continue<space>translation<space>when<space>features<space>are<space>rejected<comma><space>change<space><apos>Workspace<space>Parameters<apos><space><gt><space>Translation<space><gt><space><apos>Rejected<space>Feature<space>Handling<apos><space>to<space><apos>Continue<space>Translation<apos>)
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * RoutingFactory FACTORY_NAME "Destination Feature Type Routing Correlator"   COMMAND_PARM_EVALUATION SINGLE_PASS   INPUT FEATURE_TYPE *    ROUTE FME_GENERIC Bufferer_BUFFERED TO SVG __GO_TO_FINAL_OUTPUT_ROUTER__ multi_writer_id,0,<at>SupplyAttributes<openparen>ENCODED<comma>__wb_out_feat_type__<comma>test<closeparen> GEOMETRY   FEATURE_TYPE_ATTRIBUTE __wb_out_feat_type__   OUTPUT ROUTED FEATURE_TYPE *    OUTPUT NOT_ROUTED FEATURE_TYPE __nuke_me__ @Tcl2("FME_StatMessage 818059 [FME_GetAttribute fme_template_feature_type] 818060 818061 fme_warn")
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * TeeFactory   FACTORY_NAME "Final Output Nuker"   INPUT FEATURE_TYPE __nuke_me__
+
+# -------------------------------------------------------------------------
+SVG_1_DEF test   SVG_PAINT_ORDER              1   SVG_LAYER_STYLE              ""   _creation_instance           decimal(20,0)   i                            char(20000)

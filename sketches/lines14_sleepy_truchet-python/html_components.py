@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_beginning = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -105,7 +105,7 @@
   </main>
 
   <script>
-    const projName = 'lines12_arcs_2_fme-python'; // Replace with the actual project name
+    const projName = 'onlylines1'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -141,68 +141,9 @@
 
 
   <button id="copy-button">Copy Code</button>
- 
-  <code class="language-python" id="code-block">
-#main_script
-import fmeobjects
-import numpy as np
-from fmeobjects import FMELine, FMEPoint, FMEPolygon
-from math import sqrt, sin, cos, pi, degrees
+"""
 
-
-width =  720 
-draw_num = 4  # num circles per direction
-draw_size = width / draw_num  # circle size
-mark_num = 8  # number of circle duplicates 
-mark_size = draw_size / mark_num
-
-class FeatureProcessor(object):
-    def __init__(self):
-        pass
-
-    def geometry_group(self, tx, ty, radius): 
-
-        _center_point = FMEPoint()
-        
-        newFeature= fmeobjects.FMEFeature()
-        x = tx
-        y = ty
-        _center_point.setXYZ(x,y, 0)
-
-
-        rotation = pi*2 / 5 * 2 + pi- pi / 10    
-        newFeature= fmeobjects.FMEFeature()
-        _arc = fmeobjects.FMEArc(_center_point, 0.0, radius, radius, 30.0, 120.0)
-        _arc.rotate2D(_center_point, float(degrees(rotation)))
-        newFeature.setGeometry(_arc)
-        
-        self.pyoutput(newFeature)
-    
-    
-    def pattern(self, size):
-        for j in range(4 * (draw_num + 1)):
-            y = draw_size / 4 * j  # Move 0.25 of the size of the circle vertically 
-            dx = draw_size / 2 if j % 2 == 1 else 0  # move 0.5 horisontally if vertical direction is odd
-            for i in range(draw_num + 1):
-                x = draw_size * i  # Move horizontally by one circle
-                _start_x, _start_y = x + dx, y
-                # time to break it and move to geometry group
-                for k in range(mark_num):
-                    radius=mark_size * (mark_num - k) / 2
-                    self.geometry_group(_start_x, _start_y, radius)
-        
-                
-
-    def input(self, feature: fmeobjects.FMEFeature):
-        # svg_body = create_svg_no_deps(datastructure,'foo')
-        pass
-
-    def close(self):
-        self.pattern(draw_size)
-
- 
-  </code>
-<script>
+html_ending = """<script>
     document.getElementById('copy-button').addEventListener('click', function() {
       const codeBlock = document.getElementById('code-block');
       const range = document.createRange();
@@ -215,3 +156,4 @@ class FeatureProcessor(object):
   </script>
 </body>
 </html>
+"""
