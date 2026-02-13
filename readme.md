@@ -14,7 +14,8 @@ pillow: For reading raster files
 numpy: For creating arrays
 
 ### Instructions 
-0. copy the 'blueprint' folder (last edited in the app folder) to the new folder
+0. copy the 'blueprint' folder (last edited in the app folder) to the new folder. 
+`xcopy "c:\p5serve_fme_svg\sketches\lines15_zigzag" "nameof_project" /E /I`
 1. add .fmw file and add pythonCaller/pythonCreator transformer
 2. write the code
 3. run the workspace to write the svg file using fme writers
