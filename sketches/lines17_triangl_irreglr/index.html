@@ -105,7 +105,7 @@
   </main>
 
   <script>
-    const projName = 'lines17_triangulation_irregular'; // Replace with the actual project name
+    const projName = 'lines17_triangl_irreglr'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -147,55 +147,57 @@
 import fmeobjects
 import numpy as np
 from fmeobjects import FMELine, FMEPoint, FMEPolygon
+from scipy.spatial import Delaunay
+
 
 """
-zig-zag triangular strip is one zigzag row:
-upleft <u2192> right <u2192> downleft <u2192> right <u2192> ...
- /_\/_\
- vertices are spaced by L/2 horizontally.
-    The vertical coordinate alternates between:
-        baseline and baseline + H
-            where H = sqrt(3)/2 * L (because we need f)
-""" 
+triangulation from star polygon vertices
+where each vertex i connects to (i+k) % n.
+"""
 
-def triangle_row2(start, n, L, H):
-    moves = np.array([
-        (-L/2,  H),
-        ( L,    0),
-        (-L/2, -H),
-        ( L,    0),
-    ])
-    steps = np.tile(moves, (n, 1))        # repeat cycle
-    pts = np.vstack([start, start + np.cumsum(steps, axis=0)])
-    return pts
-
-def triangle_row(start, n, L):
-    H = np.sqrt(3) / 2 * L
-    x0, y0 = start
-    pts = [
-        (x0 + i * (L / 2), y0 + H * np.sin(i * np.pi / 2))
-        for i in range(2 * n + 1)
-        ]
-    return np.array(pts)
+def star_polygon(n, k, r=1.0):
+    pts = [(r*np.cos(2*np.pi*i/n), r*np.sin(2*np.pi*i/n)) for i in range(n)]
+    path, i = [], 0
+    while not path or i != 0:
+        path.append(pts[i])
+        i = (i + k) % n
+    return path + [path[0]]
 
 class FeatureProcessor(object):
     def __init__(self):
         pass
 
     def input(self, feature: fmeobjects.FMEFeature):
-        start_point = np.array([10,10])
-        #trianguline = triangle_row(start_point, 10, 5)
-        trianguline = triangle_row2(start_point, 11, 1, 3)
+        start_point = np.array([10,15])
+        trianguline = star_polygon(7, 2)
+        pts = trianguline
         pline_input = list(map(tuple, trianguline))
         line1 = FMELine(pline_input)
         feature.setGeometry(line1)
+        
         self.pyoutput(feature)
         
-        trianguline = triangle_row(start_point, 10, 1)
+        tri = Delaunay(pts)
+        for simplex in tri.simplices:
+        
+            triangle_pts = simplex
+            pline_input = list(map(tuple, triangle_pts))
+            line1 = FMELine(pline_input)
+            
+            polygon = FMEPolygon(line1)
+            feature.setGeometry(polygon)
+            self.pyoutput(feature)
+        
+        """
+        start_point = np.array([10,10])
+        #trianguline = triangle_row(start_point, 10, 5)
+        trianguline = triangle_row2(start_point, 11, 1, 3,1)
         pline_input = list(map(tuple, trianguline))
         line1 = FMELine(pline_input)
         feature.setGeometry(line1)
         self.pyoutput(feature)
+        """
+
 
         
         
