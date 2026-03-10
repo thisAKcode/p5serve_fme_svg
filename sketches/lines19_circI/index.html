@@ -147,50 +147,36 @@
 import fmeobjects
 import numpy as np
 from fmeobjects import FMELine, FMEPoint, FMEPolygon
-from scipy.spatial import Delaunay
+import numpy as np
 
+def node_garden_ring(n=10, r=1.0, thresh=0.4):
+    a = np.linspace(0, 2*np.pi, n, endpoint=False)
+    pts = np.c_[r*np.cos(a), r*np.sin(a)]
+    lines = []
 
-"""
-triangulation from star polygon vertices
-where each vertex i connects to (i+k) % n.
-"""
+    for i in range(n):
+        for j in range(i+1, n):
+            d = np.linalg.norm(pts[i] - pts[j])
+            if d <lt> thresh:
+                lines.append((tuple(pts[i]), tuple(pts[j])))
 
-def star_polygon(n, k, r=1.0):
-    pts = [(r*np.cos(2*np.pi*i/n), r*np.sin(2*np.pi*i/n)) for i in range(n)]
-    path, i = [], 0
-    while not path or i != 0:
-        path.append(pts[i])
-        i = (i + k) % n
-    return path + [path[0]]
+    return pts, lines
 
 class FeatureProcessor(object):
     def __init__(self):
         pass
 
     def input(self, feature: fmeobjects.FMEFeature):
-        ring = star_polygon(5, 2)            # for drawing
-        # last == first vertices, fix needed
-        nodes = np.array(ring[:-1], float)   # rm last idx to work in Delaunay
-
+        nodes, lines = node_garden_ring(n=21, r=1.0, thresh=1.8)
         # output the star boundary
-        star_line = FMELine(list(map(tuple, ring)))
-        feature.setGeometry(star_line)
-        self.pyoutput(feature)
-
-        # Delaunay from polygon nodes
-        tri = Delaunay(nodes)
-
-        for simplex in tri.simplices:
-            tri_pts = nodes[simplex]  # shape (3,2)
-
-            # close triangle ring
-            tri_ring = np.vstack([tri_pts, tri_pts[0]])
+        for line in lines:
+            print(line)
+            tri_ring = (list(map(tuple, line)))
             tri_line = FMELine([tuple(p) for p in tri_ring])
-            tri_poly = FMEPolygon(tri_line)
-
-            out_feat = fmeobjects.FMEFeature(feature)  # clone if needed
-            out_feat.setGeometry(tri_poly)
+            out_feat = fmeobjects.FMEFeature(feature)
+            out_feat.setGeometry(tri_line)
             self.pyoutput(out_feat)
+            
   </code>
 <script>
     document.getElementById('copy-button').addEventListener('click', function() {
