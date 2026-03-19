@@ -148,75 +148,81 @@ import fmeobjects
 import numpy as np
 from fmeobjects import FMELine, FMEPoint, FMEPolygon
 import math
-from sklearn.cluster import KMeans
-from sklearn.neighbors import KDTree
-from sklearn.manifold import TSNE
-from sklearn.cluster import SpectralClustering
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import rbf_kernel
+
+STEP = 1
 """
-    Generate a network using spectral clustering
-    Spectral clustering shines on non-convex shapes where KMeans fails
+    Generate a noisyline using scikit learn
+    make sliding windows
 """
 
-def generate_spectral_network(n_points=200, n_clusters=5, n_neighbors=3, seed=42):
-    # output: [((x1,y1), (x2,y2)), ...] <u2014> connected coordinate pairs
-    
+def smooth_polyline(n=200, scale=10, seed=0):
     rng = np.random.RandomState(seed)
 
-    angles = rng.uniform(0, 2 * np.pi, n_points)
-    radii = rng.choice([3, 7, 12], size=n_points) 
-    noise = rng.randn(n_points, 2) * 0.5
+    # parameter along the line
+    t = np.linspace(0, 5, n)[:, None]
 
-    points = np.column_stack([
-        radii * np.cos(angles),
-        radii * np.sin(angles)
-    ]) + noise
+    # random noise in higher dimensions
+    noise = rng.randn(n, 4)
 
+    # smooth the noise using a Gaussian kernel (Perlin-like)
+    K = rbf_kernel(t, t, gamma=1/scale)
+    smooth_noise = np.dot(K, noise)
 
-    spectral = SpectralClustering(
-        n_clusters=n_clusters,
-        affinity="nearest_neighbors",
-        n_neighbors=n_neighbors * 2,
-        random_state=seed,
-        assign_labels="kmeans"
-    )
-    labels = spectral.fit_predict(points)
+    # combine structure + smooth noise
+    data = np.column_stack([t.ravel(), smooth_noise])
 
+    # project to 2D
+    pts = PCA(n_components=2).fit_transform(data)
 
-    tree = KDTree(points)
-    _, indices = tree.query(points, k=n_neighbors + 1)
-
-    edges_idx = set()
-    for i, neighbors in enumerate(indices):
-        for j in neighbors[1:]:
-            edges_idx.add((min(i, j), max(i, j)))
-
-
-    edges = [
-        (
-            (float(points[i][0]), float(points[i][1])),
-            (float(points[j][0]), float(points[j][1]))
-        )
-        for i, j in edges_idx
-    ]
-
-    return edges
+    return pts
 
 class FeatureProcessor(object):
     def __init__(self):
         pass
 
-    def input(self, feature: fmeobjects.FMEFeature):
-        lines = generate_spectral_network(n_points=210, n_clusters=5, n_neighbors=7, seed=42)
-        print(lines)
+    def input(self, feature: fmeobjects.FMEFeature):   
+        lines = smooth_polyline(n=200, scale=10, seed=0)
+        pline_input = list(map(tuple, lines))
         # output the star boundary
-        for i,line in enumerate(lines):
-            tri_ring = (list(map(tuple, line)))
-            tri_line = FMELine([tuple(p) for p in tri_ring])
-            out_feat = fmeobjects.FMEFeature(feature)
-            out_feat.setGeometry(tri_line)
-            
-            self.pyoutput(out_feat)
+        tri_line = FMELine(pline_input)
+        out_feat = fmeobjects.FMEFeature(feature)
+        out_feat.setGeometry(tri_line)
+        self.pyoutput(out_feat)
         
+        _geom = out_feat.getGeometry()
+        length = int(_geom.getLength(False))
+        _step = STEP
+        _sequence = [(i, min(i + _step, length)) for i in range(0, length, _step)]
+        group_size  =5
+        for i, j in enumerate(_sequence):
+            # crucial step to workaround
+            # inplace geom modification
+            _clone = out_feat.clone()
+            
+            end = j[-1]
+            start = j[0]
+            seq_group_floating = end // group_size
+            _clone.setAttribute('end',end)
+            _clone.setAttribute('start',start)
+            _clone.setAttribute('seq_num',i)
+            _clone.setAttribute('seq_group2',seq_group_floating)
+            _clone.performFunction(f"@Snip({start}, {end}, 1)")
+            _clone_geom = _clone.getGeometry()
+            _clone_start_point = _clone_geom.getStartPoint()
+            _clone.getGeometry().rotate2D(_clone_start_point, 10.0)
+            self.pyoutput(_clone)
+        # little barrie here
+        n = round(length)
+        sequence = list(range(n))
+        window_size = 5
+        step = 4
+
+        result = [
+            sequence[i:i + window_size]
+            for i in range(0, n, step)
+        ]        
         
   </code>
 <script>
