@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FME Geometry: Using Python and FME Objects for generative art</title>
+  <meta name="description" content="Learn how to use Python in FME to programmatically work with feature geometries">
+  <meta name="keywords" content="FME, Python, fmeobjects, GIS, Geometry FME Objects">
+  <meta name="author" content="Aleksei Kupiakov">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-python.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+
+<style>
+      canvas {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  @media (max-width: 600px) { 
+    nav {
+      margin: 0 auto 0.2em auto !important;
+    }
+  }
+  body {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    background-color: #2d2d2d;
+  }
+
+  code {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    background-color: #2d2d2d;
+    overflow-x: auto;
+  }
+  .token.operator {
+    background: none !important;
+  }
+  #copy-button {
+    display: block;
+    margin: 20px auto;
+    color: #f8f8f2;
+    background-color: #2d2d2d;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  #code-block {
+    color: #f8f8f2;
+    background-color: #2d2d2d;
+    text-shadow: none;
+    display: block;
+    white-space: pre;
+    padding-left: 20px;
+  }
+  svg {
+    padding: 5px 5px;
+
+    margin: 20px auto;
+  }
+</style>
+</head>
+
+
+<body style="margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden;">
+  <h1>FME Geometry,   PythonCaller, GenerativeArt</h1>
+  <main id="index" class="home" style="margin-top: 0;">
+    <header id="banner" class="body">
+      <nav style="background: #000305; font-size: 1.143em; height: 40px; line-height: 30px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;">
+        <ul style="padding: 0; margin: 0; list-style: none;">
+          <li style="float: left; display: inline; margin-right: 10px;"><a href="/" style="color: white; text-decoration: none;">Back to Blog</a></li>
+          <li style="float: left; display: inline; margin-left: 10px;"><a href="/p5serve_fme_svg/index.html" style="color: white; text-decoration: none;">FME geometries</a></li>
+        </ul>
+      </nav>
+    </header><!-- /#banner -->
+  </main>
+
+  <script>
+    const projName = 'lines28_chunks3'; // Replace with the actual project name
+    const _filename = 'asset.svg'; // Replace with the actual filename
+    const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
+    const svg = d3.select("body").append("svg")
+      .attr("width", "70%")
+      .attr("height", 500)
+      .style("background-color", "#2d2d2d");
+
+    d3.xml(pathCheck).then(data => {
+      const importedNode = document.importNode(data.documentElement, true);
+      svg.node().appendChild(importedNode);
+      // Calculate dynamic stroke width based on canvas size
+      // get the actual bounding box y of svg
+      const bbox = importedNode.getBBox();
+      const dynamicStrokeWidth_1 = Math.max(0.01, bbox.height * 0.001);
+      console.log(bbox.height,dynamicStrokeWidth_1)
+      const canvasHeight = svg.node().getBoundingClientRect().height;
+      const canvasWidth = svg.node().getBoundingClientRect().width;
+      console.log(canvasHeight)
+      console.log(canvasWidth)
+      //924 is canvas width then 0.01 is fine
+      //const dynamicStrokeWidth = 0.01 // Math.max(0.01, canvasHeight * 0.001); // Adjust this factor as needed
+      const dynamicStrokeWidth  = canvasHeight* 0.001
+      console.log(dynamicStrokeWidth)
+      d3.selectAll("svg *")
+        .style("stroke-width", dynamicStrokeWidth_1)
+        .style("stroke", "white");
+    });
+  </script>
+
+
+
+    
+
+
+  <button id="copy-button">Copy Code</button>
+ 
+  <code class="language-python" id="code-block">
+#main_script
+import fmeobjects
+import numpy as np
+from fmeobjects import FMELine, FMEPoint, FMEPolygon
+import math
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import rbf_kernel
+import numpy as np
+from numpy.lib.stride_tricks import sliding_window_view
+import shapely
+from collections import namedtuple
+
+
+Segment = namedtuple("Segment", [
+    "start",
+    "end",
+    "perp_start",
+    "perp_end",
+    "bearing"
+])
+
+arr = np.arange(16)
+window_size = 5
+step = 2
+STEP = 2
+"""
+    Generate a noisyline using scikit learn
+    make sliding windows
+"""
+def perpendicular_segment_np(x0, y0, x1, y1, width):
+    p0 = np.array([x0, y0])
+    p1 = np.array([x1, y1])
+    
+    d = p1 - p0
+    u = d / np.linalg.norm(d)        # unit direction
+    
+    n = np.array([-u[1], u[0]])      # perpendicular
+    
+    half = width / 2
+    
+    perp_start = (p0 - n*half, p0 + n*half)
+    perp_end   = (p1 - n*half, p1 + n*half)
+    
+    return perp_start, perp_end
+
+def compute_bearing(x0,y0,x1,y1):
+    delta_x,delta_y = x1- x0, y1 - y0
+    theta = math.atan2(delta_x, delta_y)
+    return (math.degrees(theta) + 360) % 360
+
+def smooth_polyline(n=200, scale=10, seed=0):
+    rng = np.random.RandomState(seed)
+    t = np.linspace(0, 5, n)[:, None]
+    noise = rng.randn(n, 4)
+    K = rbf_kernel(t, t, gamma=1/scale)
+    smooth_noise = np.dot(K, noise)
+    data = np.column_stack([t.ravel(), smooth_noise])
+    pts = PCA(n_components=2).fit_transform(data)
+    return pts
+
+
+class FeatureProcessor(object):
+    def __init__(self):
+        pass
+
+    def input(self, feature: fmeobjects.FMEFeature):   
+        lines = smooth_polyline(n=200, scale=20, seed=0)
+        pline_input = list(map(tuple, lines))
+        tri_line = FMELine(pline_input)
+        out_feat = fmeobjects.FMEFeature(feature)
+        out_feat.setGeometry(tri_line)
+        self.pyoutput(out_feat)
+        
+        _geom = out_feat.getGeometry()
+        length = int(_geom.getLength(False))
+        _step = STEP
+        _sequence = [(i, min(i + _step, length)) for i in range(0, length, _step)]
+        group_size = 3
+        
+        segments = []
+        for i, j in enumerate(_sequence):
+            # crucial step to workaround
+            # inplace geom modification
+            _clone = out_feat.clone()
+            end = j[-1]
+            start = j[0]
+            seq_group_floating = end // group_size
+            _clone.setAttribute('end',end)
+            _clone.setAttribute('start',start)
+            _clone.setAttribute('seq_num',i)
+            _clone.setAttribute('seq_group2',seq_group_floating)
+            _clone.performFunction(f"@Snip({start}, {end}, 1)")
+            self.pyoutput(_clone)
+            # get coords of snipped geom
+            snipped_geom  = out_feat.getGeometry()
+            _start = _clone.getGeometry().getStartPoint().getXYZ()
+            _end = _clone.getGeometry().getEndPoint().getXYZ()
+            x0,y0,z0 = _start
+            x1,y1,z1 = _end
+            
+            bearing = compute_bearing(x0,y0,x1,y1)
+            perp_start, perp_end = perpendicular_segment_np(x0, y0, x1, y1, width=2.0)
+            
+            
+            perp_start_fme, perp_end_fme = list(map(tuple, perp_start)), list(map(tuple, perp_end))
+            
+            perp_line_start,perp_line_end = FMELine(perp_start_fme), FMELine(perp_end_fme)
+            out_perp_line_start,out_perp_line_end = fmeobjects.FMEFeature(feature),fmeobjects.FMEFeature(feature)
+            
+            out_perp_line_start.setGeometry(perp_line_start)
+            out_perp_line_end.setGeometry(perp_line_end)
+            self.pyoutput(out_perp_line_start)
+            self.pyoutput(out_perp_line_end)
+            """
+            seg = Segment(start, end, perp_start, perp_end, bearing)
+            segments.append(seg)
+            """
+            
+            
+            
+        # little barrie here 
+        
+        # Generate sliding windows
+        """
+        coords = list(line.coords)
+        
+        segments = [
+            LineString(coords[i:i+5])
+            for i in range(0, len(coords), 4)
+        ]
+        """
+        
+  </code>
+<script>
+    document.getElementById('copy-button').addEventListener('click', function() {
+      const codeBlock = document.getElementById('code-block');
+      const range = document.createRange();
+      range.selectNode(codeBlock);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+    });
+  </script>
+</body>
+</html>
