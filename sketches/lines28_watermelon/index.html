@@ -105,7 +105,7 @@
   </main>
 
   <script>
-    const projName = 'lines28_chunks3'; // Replace with the actual project name
+    const projName = 'lines28_watermelon'; // Replace with the actual project name
     const _filename = 'asset.svg'; // Replace with the actual filename
     const pathCheck = window.location.hostname === 'localhost' ? 'asset.svg' : `https://raw.githubusercontent.com/thisAKcode/p5serve_fme_svg/master/sketches/${projName}/${_filename}`;
     const svg = d3.select("body").append("svg")
@@ -156,21 +156,12 @@ import shapely
 from collections import namedtuple
 
 
-Segment = namedtuple("Segment", [
-    "start",
-    "end",
-    "perp_start",
-    "perp_end",
-    "bearing"
-])
-
 arr = np.arange(16)
 window_size = 5
 step = 2
 STEP = 2
 """
-    Generate a noisyline using scikit learn
-    make sliding windows
+    generate watermelon slice
 """
 def perpendicular_segment_np(x0, y0, x1, y1, width):
     p0 = np.array([x0, y0])
@@ -241,39 +232,27 @@ class FeatureProcessor(object):
             _start = _clone.getGeometry().getStartPoint().getXYZ()
             _end = _clone.getGeometry().getEndPoint().getXYZ()
             x0,y0,z0 = _start
-            x1,y1,z1 = _end
-            
+            x1,y1,z1 = _end            
             bearing = compute_bearing(x0,y0,x1,y1)
-            perp_start, perp_end = perpendicular_segment_np(x0, y0, x1, y1, width=2.0)
-            
-            
+            perp_start, perp_end = perpendicular_segment_np(x0, y0, x1, y1, width=2.0)           
             perp_start_fme, perp_end_fme = list(map(tuple, perp_start)), list(map(tuple, perp_end))
             
             perp_line_start,perp_line_end = FMELine(perp_start_fme), FMELine(perp_end_fme)
             out_perp_line_start,out_perp_line_end = fmeobjects.FMEFeature(feature),fmeobjects.FMEFeature(feature)
             
+            # Garage
+            # science 
+            # use i // 4 == 0:  to group 4 elements at a time into polygons
+            
+            window_index = i // 4
+            out_perp_line_start.setAttribute("window_index",window_index)
+            out_perp_line_end.setAttribute("window_index",window_index)
+            
             out_perp_line_start.setGeometry(perp_line_start)
             out_perp_line_end.setGeometry(perp_line_end)
             self.pyoutput(out_perp_line_start)
             self.pyoutput(out_perp_line_end)
-            """
-            seg = Segment(start, end, perp_start, perp_end, bearing)
-            segments.append(seg)
-            """
-            
-            
-            
-        # little barrie here 
-        
-        # Generate sliding windows
-        """
-        coords = list(line.coords)
-        
-        segments = [
-            LineString(coords[i:i+5])
-            for i in range(0, len(coords), 4)
-        ]
-        """
+
         
   </code>
 <script>
